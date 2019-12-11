@@ -1,0 +1,19 @@
+configure-role-permission {
+	display: block;
+	
+	form {
+		background-color: #fff;
+	}
+	
+	.enable-control {
+		md-switch {
+			display: inline-block;
+			margin: -.7em 0;
+			margin-left: .3em;
+		}
+	}
+	
+	.radio-button-list:not(:last-child) {
+		margin-bottom: 10px;
+	}
+}

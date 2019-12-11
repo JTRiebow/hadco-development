@@ -1,0 +1,269 @@
+<div class="row">
+    <div class="columns small-6">
+        <h2>{{::vm.employee.name}}</h2>
+    </div>
+    <div class="inline-header-row columns small-4">
+        <label class="inline" for="selectWeek">Week of: </label>
+        <input id="selectWeek" 
+               ng-model="vm.selectedWeek" 
+               datepicker-popup="MM/dd/yyyy" 
+               show-button-bar="false" 
+               is-open="vm.opened" 
+               ng-focus="vm.opened = true" 
+               ng-click="vm.opened = true;" 
+               ng-change="vm.selectedWeekChanged()" 
+               keypress-events enter="vm.selectedWeekChanged('enter')" 
+               type="text">
+    </div>
+</div>
+<div class="row" ng-if="vm.can('viewEmployeeDetails')">
+    <h4 class='text-center'>Employee Information</h4>
+    <div class="columns small-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Department</th>
+                    <th>Supervisor</th>
+                    <th>Role</th>
+                    <th>Clocked In</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="employeeSearch">
+                    <td>
+                        <a title="{{::vm.employee.name}}" ng-click="vm.detailPageWithCaching(vm.employee, selectedWeek, 'employeePage')">{{::vm.employee.name}}</a>
+                    </td>
+                    <td title="{{::vm.employee.username}}">{{::vm.employee.username}}</td>
+                    <td title="{{::vm.employee.departmentlist}}">{{::vm.employee.departmentList}}</td>
+                    <td title="{{::vm.employee.supervisorList}}">{{::vm.employee.supervisorList}}
+                    <td title="{{::vm.employee.roleList}}">{{::vm.employee.roleList}}</td>
+                    <td class="text-center" ><i class="fa fa-lg fa-clock-o" ng-class="vm.employee.isClockedIn == true ? 'blue-text' : ''" aria-hidden="true"></i></td>
+                    <td class="text-center"><i class="fa fa-lg fa-compass" aria-hidden="true" ng-class="vm.isMapAvailable ? 'green-text' : 'disabled'" ng-click="vm.openMapModal()"></i></td>                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row" ng-if="vm.can('viewAccountingTimers')">
+    <h4 class='text-center'>Accounting Timers</h4>
+    <div class="columns small-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>
+                        <div >{{::vm.days[0]}}</div>
+                    </th>
+                    <th>
+                        <div >{{::vm.days[1]}}</div>
+                    </th>
+                    <th>
+                        <div >{{::vm.days[2]}}</div>
+                    </th>
+                    <th>
+                        <div >{{::vm.days[3]}}</div>
+                    </th>
+                    <th>
+                        <div >{{::vm.days[4]}}</div>
+                    </th>
+                    <th>
+                        <div >{{::vm.days[5]}}</div>
+                    </th>
+                    <th>
+                        <div >{{::vm.days[6]}}</div>
+                    </th>
+                    <th>
+                        <div >Total</div>
+                    </th>
+                    <th >
+                        <div >Department</div>
+                    </th>
+                    <th>
+                        <div >Approve</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="timer in vm.employee.timers" class="employeeSearch">
+                    <td title="{{timer.name}}" >{{ timer.name }}</td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[0])">{{ ::timer.day6.totalHours | number : 2 }}</a> </td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[1])">{{ ::timer.day0.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[2])">{{ ::timer.day1.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[3])">{{ ::timer.day2.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[4])">{{ ::timer.day3.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[5])">{{ ::timer.day4.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[6])">{{ ::timer.day5.totalHours | number : 2 }}</a></td>
+                    <td>{{ ::timer.total | number : 2 }}</td>
+                    <td title="{{::timer.department}}">{{ ::timer.department }}</td>
+                    <td class="text-center">
+                    <i class="fa fa-check" 
+                           ng-class="vm.isAccountingReadyToApprove(timer) ? 'green-text' : 'grey-text'" 
+                           ng-click="vm.approveTimecard(timer, 'Accountant' )"
+                           aria-hidden="true">
+                        </i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row" ng-if="vm.can('viewBillingTimers')">
+    <h4 class='text-center'>Billing Timers</h4>
+    <div class="columns small-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>
+                        <div>{{::vm.days[0]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[1]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[2]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[3]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[4]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[5]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[6]}}</div>
+                    </th>
+                    <th>
+                        <div>Total</div>
+                    </th>
+                    <th>
+                        <div>Department</div>
+                    </th>
+                    <th>
+                        <div>Approve</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="timer in vm.employee.timers" class="employeeSearch">
+                    <td title="{{timer.name}}">{{ timer.name }}</td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[0])">{{ ::timer.day6.totalHours | number : 2 }}</a> </td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[1])">{{ ::timer.day0.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[2])">{{ ::timer.day1.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[3])">{{ ::timer.day2.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[4])">{{ ::timer.day3.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[5])">{{ ::timer.day4.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[6])">{{ ::timer.day5.totalHours | number : 2 }}</a></td>
+                    <td>{{ ::timer.total | number : 2 }}</td>
+                    <td title="{{::timer.department}}">{{ ::timer.department }}</td>
+                    <td class="text-center">
+                        <i class="fa fa-check" 
+                           ng-class="vm.isBillingReadyToApprove(timer) ? 'green-text' : 'grey-text'" 
+                           ng-click="vm.approveTimecard(timer, 'Biller' )"
+                           aria-hidden="true">
+                        </i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row" ng-if="vm.can('viewSupervisorTimers')">
+    <h4 class='text-center'>Supervisor Timers</h4>
+    <div class="columns small-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>
+                        <div>{{::vm.days[0]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[1]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[2]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[3]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[4]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[5]}}</div>
+                    </th>
+                    <th>
+                        <div>{{::vm.days[6]}}</div>
+                    </th>
+                    <th>
+                        <div>Total</div>
+                    </th>
+                    <th>
+                        <div>Department</div>
+                    </th>
+                    <th>
+                        <div>Approve</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="timer in vm.employee.timers" class="employeeSearch">
+                    <td title="{{::timer.name}}">{{ ::timer.name }}</td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[0])">{{ ::timer.day6.totalHours | number : 2 }}</a> </td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[1])">{{ ::timer.day0.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[2])">{{ ::timer.day1.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[3])">{{ ::timer.day2.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[4])">{{ ::timer.day3.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[5])">{{ ::timer.day4.totalHours | number : 2 }}</a></td>
+                    <td><a ng-click="vm.detailPageWithCaching(timer, vm.refDays[6])">{{ ::timer.day5.totalHours | number : 2 }}</a></td>
+                    <td>{{ ::timer.total | number : 2 }}</td>
+                    <td title="{{timer.department}}">{{ timer.department }}</td>
+                    <td class="text-center">
+                        <i class="fa fa-check" 
+                           ng-class="vm.isSupervisorReadyToApprove(timer) ? 'green-text' : 'grey-text'" 
+                           ng-click="vm.approveTimecard(timer, 'Supervisor' )"
+                           aria-hidden="true">
+                        </i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row" ng-if="vm.can('viewForemenTimesheets') && !vm.foremenTimesheetEmpty">
+    <h4 class='text-center'>Foreman Timesheets</h4>
+    <div class="columns small-12">
+        <table ng-repeat="foreman in vm.foremen">
+            <thead>
+                <tr>
+                    <th colspan="4">{{::foreman.name}}</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="timesheet in foreman.timesheets">
+                    <td>
+                    </td>
+                    <td>{{::timesheet.day}}</td>
+                    <td>{{::timesheet.status}}</td>
+                    <td><button class="button secondary tiny" ng-click="vm.viewTimesheet(timesheet)">View Timesheet</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

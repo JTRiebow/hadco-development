@@ -1,0 +1,13 @@
+﻿<div class="ui-grid-cell-contents" ng-if="!isCellHidden && !isCellEditable">{{colField}}</div>
+<div class="ui-grid-cell-contents" ng-if="!isCellHidden && isCellEditable"">
+    <input keypress-events escape="row.grid.appScope.confirmCancel(row, type)"
+           enter="row.grid.appScope.enterKeypressSave(row, type)" 
+           shift-enter="row.grid.appScope.enterKeypressSave(row, type, 'shiftEnter')" 
+           ng-required="required" type="text"
+           ng-model="row.entity[modelCollection]"
+           id="{{focusId}}"
+           typeahead="obj as obj[modelIdentifier] for obj in typeaheadList | filter: { {{modelIdentifier}}:$viewValue } | limitTo: 8"
+           typeahead-append-to-body="true"
+           typeahead-editable="false"
+           typeahead-on-select="checkCell(row.entity[modelCollection])" />
+</div>

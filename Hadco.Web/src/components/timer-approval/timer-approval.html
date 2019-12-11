@@ -1,0 +1,177 @@
+<div class="row employee-timers-header">
+    <h2 class="columns small-7">{{pageName}} Timers Approval</h2>
+
+    <div class="columns small-2 filter-button">
+        <a class='button' ng-click='newTimer()' ng-if="vm.can('addEmployeeTimer') && !disableAddTimerButton">Add&nbsp;Timer</a>
+    </div>
+
+    <div class="columns small-2 filter-button">
+        <button ng-click="clearFilters()">Clear Filters</button>
+    </div>
+
+    <div class="columns small-1">
+        <i ng-mouseenter="show = true" ng-mouseleave="show = false" class="fa fa-info-circle right fa-2x information-icon" aria-hidden="true">
+        </i>
+    </div>
+
+
+
+    <div ng-show="show" class="information-icon-text">
+        <div class="legend-colors">
+            <p class="approved-legend">5.14</p>
+            <p class="editable-legend">5.14</p>
+            <p class="approval-required-legend">5.14</p>
+            <p class="hospital-legend">
+                <i class="fa fa-hospital-o fa-2x red-text"></i>
+            </p>
+            <p class="triangle-legend">
+                <i class="fa fa-exclamation-triangle fa-2x orange-text"></i>
+            </p>
+            <p class="triangle-legend">
+                <i class="fa fa-exclamation-triangle fa-2x red-text"></i>
+            </p>
+
+        </div>
+        <div class="legend-content">
+            <p>Approved</p>
+            <p>Flagged</p>
+            <p>Requires prior approval</p>
+            <p class="injured-content">Injured</p>
+            <p class="user-flagged">User Flagged</p>
+            <p class="system-flagged">System Flagged</p>
+
+        </div>
+        <!--<li class="approval-required-legend">5.14</li>
+            
+            <li class="editable-legend">5.14</li>-->
+
+    </div>
+
+</div>
+
+
+
+<div class="row">
+    <div class="columns small-5">
+        <label>
+            <input type="search" ng-model='selectedEmployee' typeahead='e.name for e in employees | filter: {name:$viewValue} | limitTo: 8'
+                typeahead-on-select='searchChanged(selectedEmployee)' placeholder="Filter for an Employee by Name">
+            <!-- <input type="search" ng-model='selectedEmployee' ng-change="searchChanged(selectedEmployee)">-->
+        </label>
+    </div>
+    <div class="columns small-2 end">
+        <label for=""> </label>
+        <select type="text" ng-options='f.name for f in filters track by f.name' ng-model='filter' ng-change='filterChanged(filter)'>
+
+            <!--<option value="" selected="selected" disabled>Approval Status</option>-->
+        </select>
+    </div>
+
+    <div class="columns small-2 end">
+        <label for="">
+            <select type="text" ng-options='d.name as d.name for d in departments | orderBy: "name"' ng-model='dep' ng-change='departmentChanged(dep)'>
+                <!--<option value="" selected="selected" disabled>Department</option>-->
+            </select>
+        </label>
+    </div>
+    <div class='columns small-1 week-label'>Week of:</div>
+    <div class='columns small-2 timers-calendar'>
+        <label for=""></label>
+        <input id="selectWeek" ng-model="selectedWeek" datepicker-popup="MM/dd/yyyy" show-button-bar="false" is-open="opened" ng-focus="opened = true"
+            ng-click="opened = true" ng-change="selectedWeekChanged(selectedWeek)" keypress-events enter="selectedWeekChanged(selectedWeek, 'enter')"
+            type="text">
+    </div>
+    <!--<div ng-if="isAccountingPage" class="columns small-1 filter-button">
+        <a class='button' ng-click='newTimer()'>Add&nbsp;Timer</a>
+    </div>
+	<div class="columns small-2 filter-button end">
+		<button ng-click="clearFilters()">Clear Filters</button>
+	</div>-->
+</div>
+<div ng-if="employees.length > 0" class="scrolling-table">
+    <div class="fixed-table-container">
+        <div class="header-background"></div>
+        <div class="fixed-table-container-inner">
+            <table cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class='name-cell'>
+                            <div class='th-inner'>Employee Name</div>
+                        </th>
+
+                        <th ng-repeat="day in days">
+                            <div class="th-inner" ng-class="{ second: $first }">{{day}}</div>
+                        </th>
+
+                        <th>
+                            <div class="th-inner">Total</div>
+                        </th>
+                        <th class="dep-cell">
+                            <div class="th-inner">Department</div>
+                        </th>
+                        <!--<th ng-if='isAccountingPage'>
+                <div class="th-inner">Supervisor</div>
+              </th>-->
+                        <!--<th>
+                <div class="th-inner">Flag</div>
+              </th>-->
+                        <th>
+                            <div class="th-inner">Approve</div>
+                        </th>
+                        <!--<th ng-if='isSupervisorPage'>
+                <div class="th-inner">Notes</div>
+              </th>-->
+                    </tr>
+                </thead>
+
+                <tbody class="scrolling-table">
+                    <tr ng-repeat='e in filteredData.filteredEmployees = (employees | filter: searchEmployees)'>
+                        <td class='expand-on-hover' title="{{::e.name}}">{{ ::e.name }} </td>
+
+                        <td ng-repeat="day in vm.dayKeys track by $index" ng-class="getChartColor(e, 'day'+ $index)" ng-mouseenter="toolTipVisible = true"
+                            ng-mouseleave="toolTipVisible = false">
+                            <i ng-if="isInjured(e['day' + day])" class="fa fa-hospital-o red-text"></i>
+                            <i ng-if="isUserFlagged(e['day' + day])" class="fa fa-exclamation-triangle orange-text" aria-hidden="true"></i>
+                            <i ng-if="isSystemFlagged(e['day' + day])" class="fa fa-exclamation-triangle red-text" aria-hidden="true"></i>
+
+                            <div class="daily-approval-tooltip" ng-if="toolTipVisible && vm.canSeeTooltip">
+                                <div class="daily-approval-tooltip-text" ng-mouseover="toolTipVisible = true" ng-mouseleave="toolTipVisible = false">
+                                    <ul>
+                                        <li ng-if="vm.can('viewEmployeeTimer')" ng-click="detailPageWithCaching(e, refDays[$index])">View Employee Time Card</li>
+                                        <li ng-if="vm.can('approveEmployeeTimer')" ng-click="approveTimer(e,'day' + $index)">Approve</li>
+                                        <li ng-if="vm.can('flagEmployeeTimer')" ng-click="flagTimeForApproval(e,'day' + $index)">Flag for Review</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <a>
+                                <span ng-if="e['day' + day].totalHours === undefined" class="timer-null">0.00</span>
+                                {{e['day' + day].totalHours | number:2}}
+                            </a>
+                        </td>
+
+                        <td ng-bind="getTotalHours(e)"></td>
+                        <td class='expand-on-hover'>{{ e.department }}</td>
+                        <!--<td ng-if='isAccountingPage' >{{ e.supervisor }}</td>-->
+                        <!--<td><input class='check-input' ng-checked='e.flagged' ng-click="flagCard(e)" type="checkbox"></td>-->
+                        <!--<td ng-if='isSupervisorPage'><input class='check-input' ng-disabled='e.approvedBySupervisor' ng-checked='e.selectedForApproval' type="checkbox" ng-click='selectTimer(e.employeeTimecardID)'></td>-->
+                        <!--<td ng-if='isAccountingPage'><input ng-disabled='e.approvedByAccounting || !e.approvedBySupervisor' class='check-input' ng-checked='e.selectedForApproval' type="checkbox" ng-click='selectTimer(e.employeeTimecardID)'></td>-->
+                        <td class="timecard-approval-check">
+                            <div ng-class="getCheckmarkColor(e)" ng-if="vm.can('approveEmployeeTimer')">
+                                <i ng-click="approveWeekTimers(e)" class="fa fa-check" aria-hidden="true"></i>
+                            </div>
+                        </td>
+                        <!-- '!e.approvedBySupervisor || e.approvedByAccounting || approveDisabled' -->
+                        <!--<td class='expand-on-hover' ng-if='isSupervisorPage'><input type="text"></td>-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="column small-2" style='float: right;' ng-if="vm.can('approveEmployeeTimer')">
+        <!-- Removed ng-disabled='!selectedTimers.length' while timer selecting is commented out above -->
+    <button ng-if='employees.length > 0' ng-click='approveTimers()'>Approve Timers</button>
+</div>

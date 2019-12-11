@@ -1,0 +1,50 @@
+<div >
+    <h2>Downtime Reasons</h2>
+    <a href="/admin/downtime-reasons/create" class='button'>Create Downtime Reason</a>
+    
+    <input class="search" type="search" placeholder='Search Downtime Reasons...' ng-model='selectedDownTimeReason' ng-change="searchChanged(selectedDownTimeReason)" typeahead='d.description for d in allDowntimeReasons | filter: $viewValue | limitTo: 8' typeahead-on-select='searchChanged(selectedDownTimeReason)'>
+
+    <dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+    <table st-table='rowCollection' class='table table-striped'>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Code</th>
+                <th>Job Number</th>
+                <th>Phase Number</th>
+                <th>Category Number</th>
+                <th>Use Load Job</th>
+                <th>Use Load Phase</th>
+                <th>Use Load Category</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-show="selectedDownTimeReason" dir-paginate='d in filteredAllDowntimeReasons = (allDowntimeReasons | filter: selectedDownTimeReason) | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+                <td>{{ d.description }}</td>
+                <td>{{ d.code }}</td>
+                <td>{{ d.jobNumber }}</td>
+                <td>{{ d.phaseNumber }}</td>
+                <td>{{ d.categoryNumber }}</td>
+                <td>{{ d.useLoadJob }}</td>
+                <td>{{ d.useLoadPhase }}</td>
+                <td>{{ d.useLoadCategory }}</td>
+                <td><a href="/admin/downtime-reasons/{{d.downtimeReasonID}}">edit </a><a ng-click='deleteDowntimeReason(d)'>  delete</a></td>
+
+            </tr>
+            <tr ng-hide="selectedDownTimeReason" dir-paginate='d in filteredDowntimeReasons = (downtimeReasons | filter: selectedDownTimeReason) | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+                <td>{{ d.description }}</td>
+                <td>{{ d.code }}</td>
+                <td>{{ d.jobNumber }}</td>
+                <td>{{ d.phaseNumber }}</td>
+                <td>{{ d.categoryNumber }}</td>
+                <td>{{ d.useLoadJob }}</td>
+                <td>{{ d.useLoadPhase }}</td>
+                <td>{{ d.useLoadCategory }}</td>
+                <td><a href="/admin/downtime-reasons/{{d.downtimeReasonID}}">edit </a><a ng-click='deleteDowntimeReason(d)'>  delete</a></td>
+
+            </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+</div>

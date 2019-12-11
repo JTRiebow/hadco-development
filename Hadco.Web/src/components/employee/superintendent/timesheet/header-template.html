@@ -1,0 +1,55 @@
+<div role="rowgroup"
+     class="ui-grid-header">
+    <div class="ui-grid-top-panel">
+        <div class="ui-grid-header-viewport">
+            <div class="ui-grid-header-canvas">
+                <div class="ui-grid-header-cell-wrapper"
+                     ng-style="colContainer.headerCellWrapperStyle()">
+                    <div role="row"
+                         class="ui-grid-header-cell-row">
+                        <div class="ui-grid-header-cell ui-grid-clearfix ui-grid-category" ng-repeat="cat in grid.options.category"
+                             ng-if="cat.visible &&
+                             (colContainer.renderedColumns | filter:{ colDef:{category: cat.name} }).length > 0">
+                            <div ng-style="grid.appScope.getCategoryWidth(colContainer.renderedColumns, cat.name, 'category')">
+                                <span ng-if="cat.showCatName === true" class="ui-grid-categoryheader">
+                                    {{cat.displayName}}
+                                </span>
+                            </div>
+                            <p ng-if="cat.showCatName !== true">
+                            </p>
+                            <div class="ui-grid-header-cell ui-grid-clearfix ui-grid-category" ng-repeat="subcat in grid.options.subcategory"
+                                 ng-if="subcat.visible &&
+                             (colContainer.renderedColumns | filter:{ colDef:{category: cat.name, subcategory: subcat.name} }).length > 0">
+                              <div ng-style="grid.appScope.getCategoryWidth(colContainer.renderedColumns, subcat.name, 'subcategory')">
+                                <span ng-if="subcat.showCatName === true" class="ui-grid-subcategoryheader" ng-class="subcat.cellClass">
+                                    {{subcat.displayName}}
+                                </span>
+                              </div>
+                                <p ng-if="subcat.showCatName !== true">
+                                </p>
+                                <div class="ui-grid-header-cell ui-grid-clearfix categoryheadercell"
+                                     ng-repeat="col in colContainer.renderedColumns | filter:{ colDef:{category: cat.name, subcategory: subcat.name} }"
+                                     ui-grid-header-cell
+                                     col="col"
+                                     render-index="$index">
+                                </div>
+                            </div>
+                            <div class="ui-grid-header-cell ui-grid-clearfix categoryheadercell" ng-if="col.colDef.subcategory === undefined"
+                                 ng-repeat="col in colContainer.renderedColumns | filter:{ colDef:{category: cat.name}}"
+                                 ui-grid-header-cell
+                                 col="col"
+                                 render-index="$index">
+                            </div>
+                        </div><!--!cat.visible && -->
+                        <div class="ui-grid-header-cell ui-grid-clearfix categoryheadercell" ng-if="col.colDef.category === undefined"
+                             ng-repeat="col in colContainer.renderedColumns track by col.uid"
+                             ui-grid-header-cell
+                             col="col"
+                             render-index="$index">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

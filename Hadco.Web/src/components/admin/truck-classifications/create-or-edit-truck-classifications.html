@@ -1,0 +1,20 @@
+<h3>Create Truck Classification</h3>
+
+<form class="create-edit-user">
+    <div class="row">
+        <div class="columns small-6 end">
+            <h4><input  focus-me required ng-model='equipment.description' placeholder='Name' type="text"></h4>
+            <h4><input  maxlength='5' focus-me required ng-model='equipment.code' placeholder='Code' type="text"></h4>
+           
+        </div> 
+    </div>
+    <div class="row">
+        <div class="columns small-1 end">
+            <button ng-click='saveTruckClassification(equipment)'>Save</button>
+        </div>
+        <div class="columns small-2 end">
+            <a href="/admin/trucking-classifications" class='button secondary'>Cancel</a>
+        </div>
+    </div>
+
+</form>

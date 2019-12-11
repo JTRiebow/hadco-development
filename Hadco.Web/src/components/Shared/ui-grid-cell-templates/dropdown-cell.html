@@ -1,0 +1,16 @@
+﻿<div class="ui-grid-cell-contents" ng-if="!isCellHidden && !isCellEditable">
+    <i ng-show="dragHandle" class="fa fa-lg fa-arrows-v ui-grid-draggable-row-handle" aria-hidden="true"></i>
+    {{colField}}
+</div>
+<div class="ui-grid-cell-contents" ng-if="!isCellHidden && isCellEditable">
+    <i ng-show="dragHandle" class="fa fa-lg fa-ellipsis-v ui-grid-draggable-row-handle" aria-hidden="true"></i>
+    <select keypress-events escape="row.grid.appScope.confirmCancel(row, type)" 
+            enter="row.grid.appScope.enterKeypressSave(row, type)" 
+            shift-enter="row.grid.appScope.enterKeypressSave(row, type, 'shiftEnter')"
+            ng-required="required" type="text"
+            ng-model="row.entity[modelCollection]"
+            id="{{focusId}}"
+            ng-options="obj as obj[modelIdentifier] for obj in dropdownList"
+            ng-change="checkCell(row.entity[modelCollection])">
+        </select>
+</div>

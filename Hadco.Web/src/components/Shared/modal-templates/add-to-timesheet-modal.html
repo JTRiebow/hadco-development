@@ -1,0 +1,11 @@
+﻿<div class="row">
+    <div class="text-center">
+        <label> Select Supervisor: <select ng-model="supervisor" value="options[0]" ng-options="supervisor as supervisor.name for supervisor in options"></select></label>
+    </div>
+</div>
+<div class='text-center'>
+    <button class="button submit-times text-center" ng-disabled="!supervisor" ng-click="confirm(supervisor)">Submit</button>
+    <button class="button submit-times text-center secondary" ng-click="cancel()">Cancel</button>
+</div>
+
+<a class="close-reveal-modal" ng-click="cancel()">&#215;</a>

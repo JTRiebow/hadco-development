@@ -1,0 +1,1 @@
+import './human-resources-module';

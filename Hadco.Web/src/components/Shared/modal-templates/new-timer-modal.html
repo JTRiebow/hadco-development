@@ -1,0 +1,36 @@
+<form name="newTimerForm">
+	<h3 class="text-center">Add Timer</h3>
+    <div class="form-control" ng-class="{error: newTimerForm.employee.$invalid && submitted}">
+        <input 
+            type="text" 
+            name="employee" 
+            required ng-model='newTimer.employee' 
+            placeholder='Type Employee Name...' 
+            autocomplete="off"
+            typeahead='e as e.name for e in typeaheadEmployees($viewValue)' 
+            type-ahead-min-length='1' 
+            typeahead-loading='loadingInspectors' 
+            typeahead-no-results='noResults' 
+            typeahead-on-select="employeeSelected()">
+        <small class="error" ng-show="newTimerForm.employee.$invalid && submitted">Required</small>
+        <i ng-show='loadingInspectors'> </i>
+        <div ng-show='noResults'>
+            <ul>
+                <li>No Results Found</li>
+            </ul> 
+        </div>
+    </div>
+    <div class="form-control" ng-if="userHasMultipleDepartments" ng-class="{error: newTimerForm.departmentField.$invalid && submitted}" >
+        <select required name="departmentField" ng-model="newTimer.department" ng-options="option.name for option in newTimer.employee.departments track by option.departmentID">
+            <option value="">Select Department</option>
+        </select>
+        <small class="error" ng-show="newTimerForm.departmentField.$invalid && submitted">Required</small>
+    </div>
+    <div class="form-control" ng-class="{error: newTimerForm.date.$invalid && submitted}">
+        <input name="date" required ng-model="newTimer.date" placeholder="Select Day" datepicker-popup="MM/dd/yyyy" show-button-bar="false" value="newTimer.date" is-open="opened" ng-focus="opened = true" ng-click="opened = true" type="text">
+        <small class="error" ng-show="newTimerForm.date.$invalid && submitted">Required</small>
+    </div>
+	<button type="submit" class="button" ng-click="confirm(newTimer, newTimerForm)">Confirm</button>
+	<button type='button' class="button secondary" ng-click="cancel()">Cancel</button>
+	<a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+</form>

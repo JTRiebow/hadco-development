@@ -1,0 +1,167 @@
+<div class="roles-wrapper">
+	<div class="page-title">
+		<h2>Role and Permission Management</h2>
+		<div class="columns small-1">
+			<i ng-mouseenter="show = true" ng-mouseleave="show = false" class="fa fa-info-circle right fa-2x information-icon" aria-hidden="true">
+			</i>
+		</div>
+	
+	
+	
+		<div ng-show="show" class="information-icon-text">
+			<div class="legend-colors">
+				<p class="triangle-legend">
+					<md-icon class="fa fa-square-o"></md-icon>
+				</p>
+				<p class="triangle-legend">
+					<md-icon class="fa fa-minus-square-o"></md-icon>
+				</p>
+				<p class="triangle-legend">
+					<md-icon class="fa fa-check-square-o"></md-icon>
+				</p>
+	
+			</div>
+			<div class="legend-content">
+				<p>No permissions applied</p>
+				<p>Partial permissions applied</p>
+				<p>All permissions applied</p>
+	
+			</div>
+			<!--<li class="approval-required-legend">5.14</li>
+				
+				<li class="editable-legend">5.14</li>-->
+	
+		</div>
+	</div>
+	
+	<!-- <dir-pagination-controls on-page-change="vm.pageChanged(newPageNumber)" class="pagination-controls"></dir-pagination-controls> -->
+	<div class="role-table">
+		<div class="spacer header cell">
+			Activity name
+		</div>
+		
+		<div class="roles">
+			<div class="cell" ng-repeat="role in vm.roles track by role.roleId" id="role-{{ role.roleId }}">
+				{{ role.name }}
+				
+				<md-menu md-position-mode="target-right target">
+					<md-button
+						class="md-icon-button"
+						aria-label="actions for {{ role.name }}"
+						ng-click="$mdMenu.open($event)"
+						ng-disabled="vm.loading"
+					>
+						<md-icon class="fa fa-ellipsis-h"></md-icon>
+					</md-button>
+					
+					<md-menu-content class="role-action-menu">
+						<md-menu-item>
+							<md-button ng-click="vm.showBulkEditModal(role)">
+								Edit permissions to all activities for the {{ role.name }} role
+							</md-button>
+						</md-menu-item>
+					</md-menu-content>
+				</md-menu>
+			</div>
+			
+			<div
+				class="scrollbar-spacer"
+				ng-style="{
+					width: vm.horizontalScrollPadding + 'px',
+					'min-width': vm.horizontalScrollPadding + 'px',
+					flex: '0'
+				}"
+			></div>
+		</div>
+		
+		<div class="activities">
+			<div
+				class="cell activity-row"
+				ng-repeat="activity in vm.activities track by activity.authActivityID"
+				ng-class="{
+					'md-whiteframe-3dp': vm.activeRow == activity.authActivityID,
+				}"
+				id="activity-{{ activity.authActivityID }}"
+				ng-click="vm.setActiveRow(activity.authActivityID, true)"
+				tabindex="-1:"
+			>
+				{{ activity.name }}
+			</div>
+			
+			<div class="scrollbar-spacer" ng-style="{ height: vm.verticalScrollPadding + 'px' }"></div>
+		</div>
+		
+		<div class="role-activities">
+			<div
+				class="activity-row resize-me"
+				ng-repeat="activity in vm.activities track by activity.authActivityID"
+				ng-init="vm.registerVerticalResizeListeners(activity.authActivityID)"
+				data-activity="{{ activity.authActivityID }}"
+				ng-class="{
+					active: vm.activeRow == activity.authActivityID,
+					'md-whiteframe-3dp': vm.activeRow == activity.authActivityID,
+				}"
+			>
+				<div
+					class="role-tabs"
+					ng-click="vm.activeRow != activity.authActivityID && vm.setActiveRow(activity.authActivityID)"
+					tabindex="-1"
+				>
+					<md-button
+						class="cell"
+						ng-repeat="role in vm.roles track by role.roleId"
+						id="activity-{{ activity.authActivityID }}-role-{{ role.roleId }}"
+						data-role="{{ role.roleId }}"
+						tabindex="0"
+						aria-label="{{ activity.name }} for {{ role.name }}"
+						ng-click="vm.setActiveRole(role, activity.authActivityID, $event)"
+						ng-class="{
+							active: vm.activeRole == role,
+						}"
+						ng-init="roleAuthKey = 'activity-' + activity.authActivityID + '-role-' + role.roleId"
+						ng-disabled="vm.loading"
+					>
+						<span ng-if="vm.activeRow == activity.authActivityID">
+							{{ role.name }}
+						</span>
+						
+						<i
+							class="fa"
+							ng-class="{
+								'fa-check-square-o': vm.roleAuthActivities[roleAuthKey] &&
+									vm.roleAuthActivities[roleAuthKey].active &&
+									vm.roleAuthActivities[roleAuthKey].allDepartments,
+								'fa-minus-square-o': vm.roleAuthActivities[roleAuthKey] &&
+									vm.roleAuthActivities[roleAuthKey].active &&
+									!vm.roleAuthActivities[roleAuthKey].allDepartments &&
+									(vm.roleAuthActivities[roleAuthKey].ownDepartments ||
+										vm.roleAuthActivities[roleAuthKey].departmentIds.length ||
+										vm.roleAuthActivities[roleAuthKey].affectedDepartments == 'some'),
+								'fa-square-o': !(vm.roleAuthActivities[roleAuthKey].id ||
+									vm.roleAuthActivities[roleAuthKey].roleAuthActivityID ||
+									vm.roleAuthActivities[roleAuthKey].active),
+							}"
+						></i>
+					</md-button>
+				</div>
+				
+				<div class="edit-wrapper" ng-if="vm.activeRow == activity.authActivityID" ng-init="vm.setEditWrapperPosition()">
+					<configure-role-permission
+						role="vm.activeRole"
+						activity="activity"
+						departments="vm.departments"
+						role-auth="vm.roleAuthActivities[vm.currentRoleAuthKey]"
+						on-changes="vm.handleRoleAuthChange(roleAuth)"
+						on-rendered="vm.onEditFormRendered()"
+						on-destroy="vm.onEditFormDestroy()"
+						disable="vm.loading || vm.roleAuthActivities[vm.currentRoleAuthKey].loading"
+					></configure-role-permission>
+
+					<md-button class="md-raised md-primary dismiss-row" ng-click="vm.resetActiveRows()">Done</md-button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- <dir-pagination-controls on-page-change="vm.pageChanged(newPageNumber)" class="pagination-controls"></dir-pagination-controls> -->
+</div>

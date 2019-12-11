@@ -1,0 +1,25 @@
+<div class='create-user'>
+	<h2>Select Employees to track</h2>
+	 <input class="search" type="search" placeholder='Search Employees...' ng-model='selectedEmployees' ng-change="searchChanged(selectedEmployees)" typeahead='e.name for e in allEmployees | filter: $viewValue | limitTo: 8' typeahead-on-select='searchChanged(selectedEmployees)'>
+
+	<dir-pagination-controls ng-hide="selectedEmployees"  class='pagination-controls'></dir-pagination-controls>
+	<table st-table='rowCollection' class='table table-striped'>
+		<thead>
+			<tr>
+				<th colspan="2">Employee Name</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-show="selectedEmployees" dir-paginate='e in filteredAllEmployees = (allEmployees | filter: selectedEmployees) | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+				<td>{{ e.name }}</td>
+				<td><input type="checkbox" ng-model="e.trackingType" ng-true-value="1" ng-false-value="0" ng-change="updateTrackingType(e)"></td>
+			</tr>
+			<tr ng-hide="selectedEmployees" dir-paginate='e in filteredEmployees = (employees | filter: selectedEmployees) | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+			<td>{{ e.name }}</td>
+				<td><input type="checkbox" ng-model="e.trackingType" ng-true-value="1" ng-false-value="0" ng-change="updateTrackingType(e)"></td>
+			</tr>
+		</tbody>
+	</table>
+	<a class="button" href="/admin/gps-settings">Return to GPS Settings</a>
+</div>

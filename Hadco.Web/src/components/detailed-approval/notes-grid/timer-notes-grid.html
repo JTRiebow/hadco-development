@@ -1,0 +1,14 @@
+﻿ <div class="row">
+    <div class="columns small-12 jobTimerNote">
+        <div ng-repeat="note in ctrl.notes">
+                <input
+                    type="checkbox"
+                    ng-checked="note.resolved"
+                    ng-disabled="!ctrl.can('resolveEmployeeTimerFlag') || note.resolved || ctrl.timersDisabled"
+                    ng-click="ctrl.resolve(note)" />
+                <span>{{ctrl.formatTime(note.createdTime)}}</span>
+                <span>{{note.noteType.description}}</span>
+                <div>{{note.description}}</div>
+        </div>
+    </div>
+</div>

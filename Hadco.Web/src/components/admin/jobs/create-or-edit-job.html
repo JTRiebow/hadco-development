@@ -1,0 +1,31 @@
+<h3>Edit Job</h3>
+
+<form class="create-edit-user">
+	<div class="row">
+		<div class="columns small-6 end">
+			<h4>Job<input ng-model='job.name' type="text"></h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns small-6">
+			<h4>Address <input ng-model='job.address' type="text"></h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns small-6">
+			<h4>Status</h4>
+			<input type="radio" class='radio-button' name="active" value="Yes"><label>Active</label>
+	    	<input type="radio" class='radio-button' name="active" value="No" ><label>Inactive</label>
+		</div>
+		
+	</div>
+	<div class="row">
+		<div class="columns small-1">
+			<button ng-click='saveJob(job)'>Save</button>
+		</div>
+		<div class="columns small-2 end">
+			<button ng-click='cancel()'>Cancel</button>
+		</div>
+	</div>
+
+</form>

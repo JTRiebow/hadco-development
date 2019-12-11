@@ -1,0 +1,10 @@
+﻿<div class="ui-grid-cell-contents" ng-if="!isCellHidden && !isCellEditable">{{row.entity[colFieldKey] | number: decimalPlaces}}</div>
+<div class="ui-grid-cell-contents" ng-if="!isCellHidden && isCellEditable">
+    <input keypress-events escape="row.grid.appScope.confirmCancel(row, type)" 
+           enter="row.grid.appScope.enterKeypressSave(row, type)" 
+           shift-enter="row.grid.appScope.enterKeypressSave(row, type, 'shiftEnter')" 
+           ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" 
+           ng-model="row.entity[colFieldKey]" 
+           id="{{focusId}}"
+           type="number" />
+</div>

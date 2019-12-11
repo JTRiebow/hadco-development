@@ -1,0 +1,14 @@
+<form class='clock-out-modal text-center'>
+	<h4>Were you injured today? 
+		<input required ng-model='clock.injured' type="radio" class='injured-button' name="injured" ng-value=true><label>Yes</label>
+	    <input required ng-model='clock.injured' type="radio" name="injured" ng-value=false ><label>No</label>
+    </h4>
+	<!-- <input required ng-model='clock.passcode' class='passcode-input' type="text" placeholder='Passcode...'> -->
+	<button class="button submit-times text-center" ng-click="confirm(clock)">Submit</button>
+	<div>
+		<h5>By clicking SUBMIT you are confirming your times are correct.</h5>
+		<textarea placeholder='Anything you would like to report? (optional)' ng-model='clock.notes' cols="30" rows="10"></textarea>
+	</div>
+
+	<a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+</form>

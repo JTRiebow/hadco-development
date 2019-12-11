@@ -1,0 +1,18 @@
+﻿<div class="ui-grid-cell-contents" ng-if="!isCellHidden && !isCellEditable">{{hours}}:{{minutes}}</div>
+<div ng-if="!isCellHidden && isCellEditable">
+    <div class="ui-grid-time-wrapper">
+        <input type="text" numbers-only ng-model="hours" id="{{focusId}}" ng-change="updateMinutes(hours, minutes)"
+               keypress-events escape="row.grid.appScope.confirmCancel(row, type)"
+               enter="row.grid.appScope.enterKeypressSave(row, type)"
+               shift-enter="row.grid.appScope.enterKeypressSave(row, type, 'shiftEnter')"
+               class="form-control text-center ui-grid-time-input" maxlength="2">
+        <div>
+            :
+        </div>
+        <input type="text" numbers-only ng-model="minutes" ng-change="updateMinutes(hours, minutes)"
+               keypress-events escape="row.grid.appScope.confirmCancel(row, type)"
+               enter="row.grid.appScope.enterKeypressSave(row, type)"
+               shift-enter="row.grid.appScope.enterKeypressSave(row, type, 'shiftEnter')"
+               class="form-control text-center ui-grid-time-input" maxlength="2">
+    </div>
+</div>

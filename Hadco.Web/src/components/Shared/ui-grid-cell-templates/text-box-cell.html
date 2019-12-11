@@ -1,0 +1,10 @@
+<div class="ui-grid-cell-contents" title="{{colField}}" ng-if="!isCellHidden && !isCellEditable">{{colField}}</div>
+<div class="ui-grid-cell-contents" ng-if="!isCellHidden && isCellEditable">
+    <input ng-required="required" 
+           keypress-events escape="row.grid.appScope.confirmCancel(row, type)" 
+           enter="row.grid.appScope.enterKeypressSave(row, type)" 
+           shift-enter="row.grid.appScope.enterKeypressSave(row, type, 'shiftEnter')" 
+           type="text" 
+           ng-model="row.entity[colFieldKey]"
+           ng-attr-maxlength="{{ maxlength && maxlength }}" />
+</div>

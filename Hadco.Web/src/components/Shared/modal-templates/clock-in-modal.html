@@ -1,0 +1,21 @@
+<form name="clockInForm" class='clock-out-modal text-center'>
+
+	<button class="button submit-times text-center" ng-click="confirm()">Clock In</button>
+
+    <div ng-if="isTMCrushing">
+        <h3>Please select a pit:</h3>
+        <select required type="text" ng-model="clockInResponse.pitID" name="pit"
+                ng-options='pit.pitID as pit.name for pit in pits track by pit.name'></select>
+        <div class="error-message">
+            <div ng-show="clockInForm.$submitted && clockInForm.$invalid" ng-messages="clockInForm.pit.$error" role="alert">
+                <small class="error" ng-message="required">Please select a pit</small>
+            </div>
+        </div>
+    </div>
+    
+
+	<textarea placeholder='Anything you would like to report? (optional)' ng-model='clockInResponse.notes' cols="15" rows="6"></textarea>
+      
+
+	<a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+</form>

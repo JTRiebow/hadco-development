@@ -1,0 +1,9 @@
+﻿<div class="text-center">
+    <h4 ng-show="{{vm.singleNote}}">Are you sure you want to resolve note?</h4>
+    <h5 ng-show="{{vm.allNotes}}">Are you sure you want to resolve all notes?</h5>
+</div>
+<br/>
+<div class="text-center">
+    <button class="button alert" ng-click="vm.confirm()">Confirm</button>
+    <button class="button secondary" ng-click="vm.cancel()">Cancel</button>
+</div>

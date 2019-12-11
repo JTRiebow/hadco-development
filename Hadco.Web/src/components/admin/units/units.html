@@ -1,0 +1,23 @@
+<div class='create-user'>
+	<h2>Units</h2>
+	<a href="/supervisor/units/create" class='button'>Create Unit</a>
+	<!-- <input type="text" placeholder='Search units...'> -->
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+	<table st-table='rowCollection' class='table table-striped'>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr dir-paginate='u in units | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+				<td>{{ u.name }}</td>
+				<td><a href="/supervisor/units/{{u.unitID}}">edit</a><a ng-click='deleteUser(u)'>delete</a></td>
+				
+			</tr>
+		</tbody>
+	</table>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+
+</div>

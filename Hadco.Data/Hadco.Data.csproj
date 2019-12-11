@@ -1,0 +1,1253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{82E668CF-59D4-4EC0-8FD3-1BB8AB89BFB4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hadco.Data</RootNamespace>
+    <AssemblyName>Hadco.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Contrib.1.43\lib\net45\Dapper.Contrib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.Extended, Version=6.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net45\EntityFramework.Extended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.3.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.1.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attribute\NonSearchableAttribute.cs" />
+    <Compile Include="AuthActivityRepository.cs" />
+    <Compile Include="CsvObjects\CsvDto.cs" />
+    <Compile Include="CsvObjects\DiscrepancyTimerCsvDto.cs" />
+    <Compile Include="CsvObjects\DowntimeTimerCsvDto.cs" />
+    <Compile Include="CsvObjects\EmployeeClockInsOutsCSVDto.cs" />
+    <Compile Include="CsvObjects\EmployeeRolesCsvDto.cs" />
+    <Compile Include="CsvObjects\EmployeeTimecardCsvDto.cs" />
+    <Compile Include="CsvObjects\EquipmentTimerCsv.cs" />
+    <Compile Include="CsvObjects\JobTimerConcreteCsvDto.cs" />
+    <Compile Include="CsvObjects\JobTimerInvoiceCsvDto.cs" />
+    <Compile Include="CsvObjects\JobTimerCsvDto.cs" />
+    <Compile Include="CsvObjects\LoadTimerCsvDto.cs" />
+    <Compile Include="CsvObjects\NotesCsvDto.cs" />
+    <Compile Include="CsvObjects\OccurrencesCsvDto.cs" />
+    <Compile Include="CsvObjects\QuantitiesCSVDto.cs" />
+    <Compile Include="CsvObjects\TMCrushingTimecardCsvDto.cs" />
+    <Compile Include="Entities\TrackedEntity.cs" />
+    <Compile Include="Migrations\201803061502493_AddAuthActivities.cs" />
+    <Compile Include="Migrations\201803061502493_AddAuthActivities.Designer.cs">
+      <DependentUpon>201803061502493_AddAuthActivities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803071609202_AddRoleAuthActivityIndex.cs" />
+    <Compile Include="Migrations\201803071609202_AddRoleAuthActivityIndex.Designer.cs">
+      <DependentUpon>201803071609202_AddRoleAuthActivityIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121807299_AddRoleAuthActivityDepartmentsTable.cs" />
+    <Compile Include="Migrations\201803121807299_AddRoleAuthActivityDepartmentsTable.Designer.cs">
+      <DependentUpon>201803121807299_AddRoleAuthActivityDepartmentsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804101833331_AddAuthActivityKey.cs" />
+    <Compile Include="Migrations\201804101833331_AddAuthActivityKey.Designer.cs">
+      <DependentUpon>201804101833331_AddAuthActivityKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805211717224_AddedOpenTimerEntryConstraint.cs" />
+    <Compile Include="Migrations\201805211717224_AddedOpenTimerEntryConstraint.Designer.cs">
+      <DependentUpon>201805211717224_AddedOpenTimerEntryConstraint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806281718246_AddedTrackedEntities.cs" />
+    <Compile Include="Migrations\201806281718246_AddedTrackedEntities.Designer.cs">
+      <DependentUpon>201806281718246_AddedTrackedEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808091647555_AddedAuthorizeNoteToEmployeeTimer.cs" />
+    <Compile Include="Migrations\201808091647555_AddedAuthorizeNoteToEmployeeTimer.Designer.cs">
+      <DependentUpon>201808091647555_AddedAuthorizeNoteToEmployeeTimer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809052123235_addSchedulingRole.cs" />
+    <Compile Include="Migrations\201809052123235_addSchedulingRole.Designer.cs">
+      <DependentUpon>201809052123235_addSchedulingRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810021511474_AddPitLocation_HerrimanPit.cs" />
+    <Compile Include="Migrations\201810021511474_AddPitLocation_HerrimanPit.Designer.cs">
+      <DependentUpon>201810021511474_AddPitLocation_HerrimanPit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812210437069_AddKeyToPitName.cs" />
+    <Compile Include="Migrations\201812210437069_AddKeyToPitName.Designer.cs">
+      <DependentUpon>201812210437069_AddKeyToPitName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911051834068_AddStatusToPhaseAndCategories.cs" />
+    <Compile Include="Migrations\201911051834068_AddStatusToPhaseAndCategories.Designer.cs">
+      <DependentUpon>201911051834068_AddStatusToPhaseAndCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RoleAuthActivityRepository.cs" />
+    <Compile Include="CsvRepository.cs" />
+    <Compile Include="DailyApprovalRepository.cs" />
+    <Compile Include="Entities\AuthActivity.cs" />
+    <Compile Include="Entities\AuthSection.cs" />
+    <Compile Include="Entities\ClockedInStatus.cs" />
+    <Compile Include="Entities\DailyApproval.cs" />
+    <Compile Include="Entities\RoleAuthActivity.cs" />
+    <Compile Include="Entities\Setting.cs" />
+    <Compile Include="Entities\Note.cs" />
+    <Compile Include="Entities\NoteType.cs" />
+    <Compile Include="FlagHandlers\FlagHandler.cs" />
+    <Compile Include="FlagHandlers\InjuryFlagHandler.cs" />
+    <Compile Include="FlagHandlers\NullFlagHandler.cs" />
+    <Compile Include="FlagHandlers\TooManyHoursFlagHandler.cs" />
+    <Compile Include="Migrations\201703061559026_AddSettings.cs" />
+    <Compile Include="Migrations\201703061559026_AddSettings.Designer.cs">
+      <DependentUpon>201703061559026_AddSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703221841391_IncreaseNoteLength.cs" />
+    <Compile Include="Migrations\201703221841391_IncreaseNoteLength.Designer.cs">
+      <DependentUpon>201703221841391_IncreaseNoteLength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703131940061_UpdateApprovalLevel.cs" />
+    <Compile Include="Migrations\201703131940061_UpdateApprovalLevel.Designer.cs">
+      <DependentUpon>201703131940061_UpdateApprovalLevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704122058576_ClockedInStatuses.cs" />
+    <Compile Include="Migrations\201704122058576_ClockedInStatuses.Designer.cs">
+      <DependentUpon>201704122058576_ClockedInStatuses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703152224009_AddNotes.cs" />
+    <Compile Include="Migrations\201703152224009_AddNotes.Designer.cs">
+      <DependentUpon>201703152224009_AddNotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703201613395_AddNoteTypes.cs" />
+    <Compile Include="Migrations\201703201613395_AddNoteTypes.Designer.cs">
+      <DependentUpon>201703201613395_AddNoteTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704171658098_BlankMigration.cs" />
+    <Compile Include="Migrations\201704171658098_BlankMigration.Designer.cs">
+      <DependentUpon>201704171658098_BlankMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704202140447_DailyApprovalAndNotes.cs" />
+    <Compile Include="Migrations\201704202140447_DailyApprovalAndNotes.Designer.cs">
+      <DependentUpon>201704202140447_DailyApprovalAndNotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704251832433_DailyApprovalIndex.cs" />
+    <Compile Include="Migrations\201704251832433_DailyApprovalIndex.Designer.cs">
+      <DependentUpon>201704251832433_DailyApprovalIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705162127054_AddedNoteTypeProperties.cs" />
+    <Compile Include="Migrations\201705162127054_AddedNoteTypeProperties.Designer.cs">
+      <DependentUpon>201705162127054_AddedNoteTypeProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705162215222_AddedCreateEmployeeID.cs" />
+    <Compile Include="Migrations\201705162215222_AddedCreateEmployeeID.Designer.cs">
+      <DependentUpon>201705162215222_AddedCreateEmployeeID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705241519009_removedTimerTypes.cs" />
+    <Compile Include="Migrations\201705241519009_removedTimerTypes.Designer.cs">
+      <DependentUpon>201705241519009_removedTimerTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706051740024_ConfigureClockInStatus.cs" />
+    <Compile Include="Migrations\201706051740024_ConfigureClockInStatus.Designer.cs">
+      <DependentUpon>201706051740024_ConfigureClockInStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NoteTypeRepository.cs" />
+    <Compile Include="NoteRepository.cs" />
+    <Compile Include="Entities\EquipmentTimerEntry.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\LoadTimerEntry.cs" />
+    <Compile Include="Entities\OverheadCode.cs" />
+    <Compile Include="EquipmentTimerEntryRepository.cs" />
+    <Compile Include="LoadTimerEntryRepository.cs" />
+    <Compile Include="LocationRepository.cs" />
+    <Compile Include="Migrations\201604280104405_addPitsAndAddPitIDToEmployeeTimerEntry.cs" />
+    <Compile Include="Migrations\201604280104405_addPitsAndAddPitIDToEmployeeTimerEntry.Designer.cs">
+      <DependentUpon>201604280104405_addPitsAndAddPitIDToEmployeeTimerEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604281546432_AddTransportLoadTimers.cs" />
+    <Compile Include="Migrations\201604281546432_AddTransportLoadTimers.Designer.cs">
+      <DependentUpon>201604281546432_AddTransportLoadTimers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605020459239_removeDepartmentIdentity.cs" />
+    <Compile Include="Migrations\201605020459239_removeDepartmentIdentity.Designer.cs">
+      <DependentUpon>201605020459239_removeDepartmentIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605021736538_RemovedTransportLoadTimers.cs" />
+    <Compile Include="Migrations\201605021736538_RemovedTransportLoadTimers.Designer.cs">
+      <DependentUpon>201605021736538_RemovedTransportLoadTimers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605031642017_AddLoadTimerEntries.cs" />
+    <Compile Include="Migrations\201605031642017_AddLoadTimerEntries.Designer.cs">
+      <DependentUpon>201605031642017_AddLoadTimerEntries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605042001095_EnsureDepartmentIDUnique.cs" />
+    <Compile Include="Migrations\201605042001095_EnsureDepartmentIDUnique.Designer.cs">
+      <DependentUpon>201605042001095_EnsureDepartmentIDUnique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605051704255_ChangeLoadTimerEntryNames.cs" />
+    <Compile Include="Migrations\201605051704255_ChangeLoadTimerEntryNames.Designer.cs">
+      <DependentUpon>201605051704255_ChangeLoadTimerEntryNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605101729361_AddConstraintOnTimesheet.cs" />
+    <Compile Include="Migrations\201605101729361_AddConstraintOnTimesheet.Designer.cs">
+      <DependentUpon>201605101729361_AddConstraintOnTimesheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605232116567_DownTimeReason.cs" />
+    <Compile Include="Migrations\201605232116567_DownTimeReason.Designer.cs">
+      <DependentUpon>201605232116567_DownTimeReason.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605251934592_AddEmployeeTimerUniqueConstraint.cs" />
+    <Compile Include="Migrations\201605251934592_AddEmployeeTimerUniqueConstraint.Designer.cs">
+      <DependentUpon>201605251934592_AddEmployeeTimerUniqueConstraint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605311701245_MakeTimesheetEquipmentUseTimeNullable.cs" />
+    <Compile Include="Migrations\201605311701245_MakeTimesheetEquipmentUseTimeNullable.Designer.cs">
+      <DependentUpon>201605311701245_MakeTimesheetEquipmentUseTimeNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606061629127_MakeTimesheetEquipmentUseTimeNonNullable.cs" />
+    <Compile Include="Migrations\201606061629127_MakeTimesheetEquipmentUseTimeNonNullable.Designer.cs">
+      <DependentUpon>201606061629127_MakeTimesheetEquipmentUseTimeNonNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606072145253_AddedIsDumpedToLoadTimer.cs" />
+    <Compile Include="Migrations\201606072145253_AddedIsDumpedToLoadTimer.Designer.cs">
+      <DependentUpon>201606072145253_AddedIsDumpedToLoadTimer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606091957269_AddLocationTable.cs" />
+    <Compile Include="Migrations\201606091957269_AddLocationTable.Designer.cs">
+      <DependentUpon>201606091957269_AddLocationTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606131539346_RefactoredLocation.cs" />
+    <Compile Include="Migrations\201606131539346_RefactoredLocation.Designer.cs">
+      <DependentUpon>201606131539346_RefactoredLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606142306240_AddedTrackedByToDepartment.cs" />
+    <Compile Include="Migrations\201606142306240_AddedTrackedByToDepartment.Designer.cs">
+      <DependentUpon>201606142306240_AddedTrackedByToDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606152246418_AddTruckClassificationIDToLoadTimers.cs" />
+    <Compile Include="Migrations\201606152246418_AddTruckClassificationIDToLoadTimers.Designer.cs">
+      <DependentUpon>201606152246418_AddTruckClassificationIDToLoadTimers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606161853019_AddCustomerTypeAndComputedRevenueFields.cs" />
+    <Compile Include="Migrations\201606161853019_AddCustomerTypeAndComputedRevenueFields.Designer.cs">
+      <DependentUpon>201606161853019_AddCustomerTypeAndComputedRevenueFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606212145119_AddTruckerDailyView.cs" />
+    <Compile Include="Migrations\201606212145119_AddTruckerDailyView.Designer.cs">
+      <DependentUpon>201606212145119_AddTruckerDailyView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606221612122_AddDowntimeCodeTruckerDailies.cs" />
+    <Compile Include="Migrations\201606221612122_AddDowntimeCodeTruckerDailies.Designer.cs">
+      <DependentUpon>201606221612122_AddDowntimeCodeTruckerDailies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606222053054_MadeJobPhaseCategoryIDNullable.cs" />
+    <Compile Include="Migrations\201606222053054_MadeJobPhaseCategoryIDNullable.Designer.cs">
+      <DependentUpon>201606222053054_MadeJobPhaseCategoryIDNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606231725298_UpdateTruckerDailiesView.cs" />
+    <Compile Include="Migrations\201606231725298_UpdateTruckerDailiesView.Designer.cs">
+      <DependentUpon>201606231725298_UpdateTruckerDailiesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606241937324_AddTruckerDailyID.cs" />
+    <Compile Include="Migrations\201606241937324_AddTruckerDailyID.Designer.cs">
+      <DependentUpon>201606241937324_AddTruckerDailyID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606282237368_AddSubDepartmentTimersTimecards.cs" />
+    <Compile Include="Migrations\201606282237368_AddSubDepartmentTimersTimecards.Designer.cs">
+      <DependentUpon>201606282237368_AddSubDepartmentTimersTimecards.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606301833080_AlterGetTimespanHoursAndTruckerDaily.cs" />
+    <Compile Include="Migrations\201606301833080_AlterGetTimespanHoursAndTruckerDaily.Designer.cs">
+      <DependentUpon>201606301833080_AlterGetTimespanHoursAndTruckerDaily.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607081820392_AddedUpdatedDateToPricing.cs" />
+    <Compile Include="Migrations\201607081820392_AddedUpdatedDateToPricing.Designer.cs">
+      <DependentUpon>201607081820392_AddedUpdatedDateToPricing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607081912255_ChangedRunIDtoPhaseID.cs" />
+    <Compile Include="Migrations\201607081912255_ChangedRunIDtoPhaseID.Designer.cs">
+      <DependentUpon>201607081912255_ChangedRunIDtoPhaseID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607102228200_AddPricePerUnit.cs" />
+    <Compile Include="Migrations\201607102228200_AddPricePerUnit.Designer.cs">
+      <DependentUpon>201607102228200_AddPricePerUnit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607112014483_ChangePricingStartEndTimeType.cs" />
+    <Compile Include="Migrations\201607112014483_ChangePricingStartEndTimeType.Designer.cs">
+      <DependentUpon>201607112014483_ChangePricingStartEndTimeType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607132240141_RemoveCalculatedRevenue.cs" />
+    <Compile Include="Migrations\201607132240141_RemoveCalculatedRevenue.Designer.cs">
+      <DependentUpon>201607132240141_RemoveCalculatedRevenue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607151659074_ChangePricingStartDate.cs" />
+    <Compile Include="Migrations\201607151659074_ChangePricingStartDate.Designer.cs">
+      <DependentUpon>201607151659074_ChangePricingStartDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607151718261_ChangePricingStartDate1.cs" />
+    <Compile Include="Migrations\201607151718261_ChangePricingStartDate1.Designer.cs">
+      <DependentUpon>201607151718261_ChangePricingStartDate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607202134371_AddEquipmentTimerEntries.cs" />
+    <Compile Include="Migrations\201607202134371_AddEquipmentTimerEntries.Designer.cs">
+      <DependentUpon>201607202134371_AddEquipmentTimerEntries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608172215508_IdentityBugFix.cs" />
+    <Compile Include="Migrations\201608172215508_IdentityBugFix.Designer.cs">
+      <DependentUpon>201608172215508_IdentityBugFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609191738138_RemoveEmployeeTimerUniqueConstraint.cs" />
+    <Compile Include="Migrations\201609191738138_RemoveEmployeeTimerUniqueConstraint.Designer.cs">
+      <DependentUpon>201609191738138_RemoveEmployeeTimerUniqueConstraint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609261507529_RemoveAdditionalTimerConstraint.cs" />
+    <Compile Include="Migrations\201609261507529_RemoveAdditionalTimerConstraint.Designer.cs">
+      <DependentUpon>201609261507529_RemoveAdditionalTimerConstraint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610131907547_AddSystemGenatedDowntimeFlag.cs" />
+    <Compile Include="Migrations\201610131907547_AddSystemGenatedDowntimeFlag.Designer.cs">
+      <DependentUpon>201610131907547_AddSystemGenatedDowntimeFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612080301467_AddPlannedQuantities.cs" />
+    <Compile Include="Migrations\201612080301467_AddPlannedQuantities.Designer.cs">
+      <DependentUpon>201612080301467_AddPlannedQuantities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612081620403_PreviousQuantity.cs" />
+    <Compile Include="Migrations\201612081620403_PreviousQuantity.Designer.cs">
+      <DependentUpon>201612081620403_PreviousQuantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612082044348_AddOtherNewQuantity.cs" />
+    <Compile Include="Migrations\201612082044348_AddOtherNewQuantity.Designer.cs">
+      <DependentUpon>201612082044348_AddOtherNewQuantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612271817070_AddUpdatedTimeToJobTable.cs" />
+    <Compile Include="Migrations\201612271817070_AddUpdatedTimeToJobTable.Designer.cs">
+      <DependentUpon>201612271817070_AddUpdatedTimeToJobTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701042001203_AddInvoiceNumber.cs" />
+    <Compile Include="Migrations\201701042001203_AddInvoiceNumber.Designer.cs">
+      <DependentUpon>201701042001203_AddInvoiceNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701101900256_IncreaseInvoiceNumberLength.cs" />
+    <Compile Include="Migrations\201701101900256_IncreaseInvoiceNumberLength.Designer.cs">
+      <DependentUpon>201701101900256_IncreaseInvoiceNumberLength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701121805597_AddOverheadCodes.cs" />
+    <Compile Include="Migrations\201701121805597_AddOverheadCodes.Designer.cs">
+      <DependentUpon>201701121805597_AddOverheadCodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701122308252_RemoveTruckerDailyView.cs" />
+    <Compile Include="Migrations\201701122308252_RemoveTruckerDailyView.Designer.cs">
+      <DependentUpon>201701122308252_RemoveTruckerDailyView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701252238038_AddUniqueFilteredConstraints.cs" />
+    <Compile Include="Migrations\201701252238038_AddUniqueFilteredConstraints.Designer.cs">
+      <DependentUpon>201701252238038_AddUniqueFilteredConstraints.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702092022563_AddDowntimeReasonMobileFlag.cs" />
+    <Compile Include="Migrations\201702092022563_AddDowntimeReasonMobileFlag.Designer.cs">
+      <DependentUpon>201702092022563_AddDowntimeReasonMobileFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PitRepository.cs" />
+    <Compile Include="Entities\Pit.cs" />
+    <Compile Include="Migrations\201602222043512_addTruckClassifications.cs" />
+    <Compile Include="Migrations\201602222043512_addTruckClassifications.Designer.cs">
+      <DependentUpon>201602222043512_addTruckClassifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602230000178_addPricesAndPricing.cs" />
+    <Compile Include="Migrations\201602230000178_addPricesAndPricing.Designer.cs">
+      <DependentUpon>201602230000178_addPricesAndPricing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602231723431_updateTruckingClassification.cs" />
+    <Compile Include="Migrations\201602231723431_updateTruckingClassification.Designer.cs">
+      <DependentUpon>201602231723431_updateTruckingClassification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602241644436_IdentityColumnChange.cs" />
+    <Compile Include="Migrations\201602241644436_IdentityColumnChange.Designer.cs">
+      <DependentUpon>201602241644436_IdentityColumnChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602241649410_identity change.cs" />
+    <Compile Include="Migrations\201602241649410_identity change.Designer.cs">
+      <DependentUpon>201602241649410_identity change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602292002140_updatePricing.cs" />
+    <Compile Include="Migrations\201602292002140_updatePricing.Designer.cs">
+      <DependentUpon>201602292002140_updatePricing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603022220509_updatePricingEntity.cs" />
+    <Compile Include="Migrations\201603022220509_updatePricingEntity.Designer.cs">
+      <DependentUpon>201603022220509_updatePricingEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603022310250_updatePricing1.cs" />
+    <Compile Include="Migrations\201603022310250_updatePricing1.Designer.cs">
+      <DependentUpon>201603022310250_updatePricing1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603060205369_dateDifferencingFunction.cs" />
+    <Compile Include="Migrations\201603060205369_dateDifferencingFunction.Designer.cs">
+      <DependentUpon>201603060205369_dateDifferencingFunction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603072029561_addBreakTimer.cs" />
+    <Compile Include="Migrations\201603072029561_addBreakTimer.Designer.cs">
+      <DependentUpon>201603072029561_addBreakTimer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603072137021_resolveMigrations.cs" />
+    <Compile Include="Migrations\201603072137021_resolveMigrations.Designer.cs">
+      <DependentUpon>201603072137021_resolveMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603112343317_removePricingEntityStatus.cs" />
+    <Compile Include="Migrations\201603112343317_removePricingEntityStatus.Designer.cs">
+      <DependentUpon>201603112343317_removePricingEntityStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604042124068_removeIdentityFromSeededEntities.cs" />
+    <Compile Include="Migrations\201604042124068_removeIdentityFromSeededEntities.Designer.cs">
+      <DependentUpon>201604042124068_removeIdentityFromSeededEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604071608487_addEmployeeLocation.cs" />
+    <Compile Include="Migrations\201604071608487_addEmployeeLocation.Designer.cs">
+      <DependentUpon>201604071608487_addEmployeeLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PriceRepository.cs" />
+    <Compile Include="PricingRepository.cs" />
+    <Content Include="Sql\AddLoadTimerDowntimes.sql" />
+    <Content Include="Sql\CreateTruckerDailyView.sql" />
+    <Content Include="Sql\GetDiscrepancyTimersCsv.sql" />
+    <Content Include="Sql\GetEmployeeListings.sql" />
+    <Content Include="Sql\GetEmployeeTimecards.sql" />
+    <Content Include="Sql\GetEquipmentTimerCsv.sql" />
+    <Content Include="Sql\GetEmployeeRolesCsv.sql" />
+    <Content Include="Sql\GetQuantitiesCsv.sql" />
+    <Content Include="Sql\GetNotesCsv.sql" />
+    <Content Include="Sql\GetOccurrencesCsv.sql" />
+    <Content Include="Sql\GetTruckingTimerDiscrepanciesCsv.sql" />
+    <Content Include="Sql\GetUnallocatedTimeConcreteCsv.sql" />
+    <Content Include="Sql\GetTruckerDailiesDowntimeTimers.sql" />
+    <Content Include="Sql\GetEmployeeClockInsOutsCSV.sql" />
+    <Content Include="Sql\UpdatePricePerUnit.sql" />
+    <None Include="Sql\GetCustomerTypeID.sql" />
+    <Content Include="Sql\GetEmployeeTimecardCsv.sql" />
+    <Content Include="Sql\GetEmployeeTimecardSummary.sql" />
+    <Content Include="Sql\GetJobTimerCsv.sql" />
+    <Content Include="Sql\GetDowntimeTimersCsv.sql" />
+    <Content Include="Sql\GetSingleTruckerDaily.sql" />
+    <None Include="Sql\GetTruckClassificationID.sql" />
+    <Content Include="Sql\GetLoadTimersCsv.sql" />
+    <Compile Include="SettingRepository.cs" />
+    <Compile Include="TruckClassificationRepository.cs" />
+    <Compile Include="CustomerTypeRepository.cs" />
+    <Compile Include="DapperExtensions.cs" />
+    <Compile Include="EmployeeJobEquipmentTimerRepository.cs" />
+    <Compile Include="EmployeeTimercardRepository.cs" />
+    <Compile Include="EmployeeTimerEntryHistoryRepository.cs" />
+    <Compile Include="EmployeeTimerEntryRepository.cs" />
+    <Compile Include="Entities\CustomerType.cs" />
+    <Compile Include="Entities\DowntimeReason.cs" />
+    <Compile Include="Entities\EmployeeJobEquipmentTimer.cs" />
+    <Compile Include="Entities\EmployeeJobTimer.cs" />
+    <Compile Include="Entities\EmployeeTimer.cs" />
+    <Compile Include="Entities\EmployeeTimerEntry.cs" />
+    <Compile Include="Entities\EmployeeTimerEntryHistory.cs" />
+    <Compile Include="Entities\EmployeeType.cs" />
+    <Compile Include="Entities\Material.cs" />
+    <Compile Include="Entities\Price.cs" />
+    <Compile Include="Entities\Pricing.cs" />
+    <Compile Include="Entities\EquipmentServiceType.cs" />
+    <Compile Include="Entities\LoadTimer.cs" />
+    <Compile Include="Entities\JobTimer.cs" />
+    <Compile Include="Entities\Occurrence.cs" />
+    <Compile Include="Entities\Timesheet.cs" />
+    <Compile Include="Entities\DowntimeTimer.cs" />
+    <Compile Include="Entities\BillType.cs" />
+    <Compile Include="Entities\TruckClassification.cs" />
+    <Compile Include="Entities\EmployeeTimecard.cs" />
+    <Compile Include="EquipmentRepository.cs" />
+    <Compile Include="EmployeeRepository.cs" />
+    <Compile Include="DepartmentRepository.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Department.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\Equipment.cs" />
+    <Compile Include="Entities\Job.cs" />
+    <Compile Include="Entities\Phase.cs" />
+    <Compile Include="Entities\Resource.cs" />
+    <Compile Include="Entities\RoleResource.cs" />
+    <Compile Include="Entities\EquipmentTimer.cs" />
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="Entities\IModel.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="IQueryableExtensions.cs" />
+    <Compile Include="CustomerRepository.cs" />
+    <Compile Include="EmployeeJobTimerRepository.cs" />
+    <Compile Include="EmployeeTimerRepository.cs" />
+    <Compile Include="EquipmentServiceTypeRepository.cs" />
+    <Compile Include="EquipmentTimerRepository.cs" />
+    <Compile Include="DowntimeTimerRepository.cs" />
+    <Compile Include="LoadTimerRepository.cs" />
+    <Compile Include="JobTimerRepository.cs" />
+    <Compile Include="Migrations\201511031843182_modifyDateFieldTimesheet.cs" />
+    <Compile Include="Migrations\201511031843182_modifyDateFieldTimesheet.Designer.cs">
+      <DependentUpon>201511031843182_modifyDateFieldTimesheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511041334307_addFKtoTimesheetOnJobTimer.cs" />
+    <Compile Include="Migrations\201511041334307_addFKtoTimesheetOnJobTimer.Designer.cs">
+      <DependentUpon>201511041334307_addFKtoTimesheetOnJobTimer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511041346316_timesheetEquipmentIDNullable.cs" />
+    <Compile Include="Migrations\201511041346316_timesheetEquipmentIDNullable.Designer.cs">
+      <DependentUpon>201511041346316_timesheetEquipmentIDNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511041516294_jobTimerEmployeeTimerNullableFields.cs" />
+    <Compile Include="Migrations\201511041516294_jobTimerEmployeeTimerNullableFields.Designer.cs">
+      <DependentUpon>201511041516294_jobTimerEmployeeTimerNullableFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511041602279_nullableFieldJobTimer.cs" />
+    <Compile Include="Migrations\201511041602279_nullableFieldJobTimer.Designer.cs">
+      <DependentUpon>201511041602279_nullableFieldJobTimer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511041722092_employeeTimerEntries.cs" />
+    <Compile Include="Migrations\201511041722092_employeeTimerEntries.Designer.cs">
+      <DependentUpon>201511041722092_employeeTimerEntries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511042035080_equipmentUserAndDepartment.cs" />
+    <Compile Include="Migrations\201511042035080_equipmentUserAndDepartment.Designer.cs">
+      <DependentUpon>201511042035080_equipmentUserAndDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511042158079_equipmentTimer.cs" />
+    <Compile Include="Migrations\201511042158079_equipmentTimer.Designer.cs">
+      <DependentUpon>201511042158079_equipmentTimer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511050019093_employeeTimerSubmittedFlag.cs" />
+    <Compile Include="Migrations\201511050019093_employeeTimerSubmittedFlag.Designer.cs">
+      <DependentUpon>201511050019093_employeeTimerSubmittedFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511050027185_employeeTimerDepartment.cs" />
+    <Compile Include="Migrations\201511050027185_employeeTimerDepartment.Designer.cs">
+      <DependentUpon>201511050027185_employeeTimerDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511051931318_employeeTimerEntryNotesAndCoordinates.cs" />
+    <Compile Include="Migrations\201511051931318_employeeTimerEntryNotesAndCoordinates.Designer.cs">
+      <DependentUpon>201511051931318_employeeTimerEntryNotesAndCoordinates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511051955450_updateEmployeeTimerEntryCoordinates.cs" />
+    <Compile Include="Migrations\201511051955450_updateEmployeeTimerEntryCoordinates.Designer.cs">
+      <DependentUpon>201511051955450_updateEmployeeTimerEntryCoordinates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511061646471_loadTimerEntities.cs" />
+    <Compile Include="Migrations\201511061646471_loadTimerEntities.Designer.cs">
+      <DependentUpon>201511061646471_loadTimerEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511092107312_NumbersTable.cs" />
+    <Compile Include="Migrations\201511092107312_NumbersTable.Designer.cs">
+      <DependentUpon>201511092107312_NumbersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511092114330_DateSeries.cs" />
+    <Compile Include="Migrations\201511092114330_DateSeries.Designer.cs">
+      <DependentUpon>201511092114330_DateSeries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511111300135_EmployeeTimecards.cs" />
+    <Compile Include="Migrations\201511111300135_EmployeeTimecards.Designer.cs">
+      <DependentUpon>201511111300135_EmployeeTimecards.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511111302104_EmployeeTimecardsUpdate.cs" />
+    <Compile Include="Migrations\201511111302104_EmployeeTimecardsUpdate.Designer.cs">
+      <DependentUpon>201511111302104_EmployeeTimecardsUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511111310506_TimecardUpdate2.cs" />
+    <Compile Include="Migrations\201511111310506_TimecardUpdate2.Designer.cs">
+      <DependentUpon>201511111310506_TimecardUpdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511112340218_OccurrenceCode.cs" />
+    <Compile Include="Migrations\201511112340218_OccurrenceCode.Designer.cs">
+      <DependentUpon>201511112340218_OccurrenceCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511112344305_weeklyTimesheetSP.cs" />
+    <Compile Include="Migrations\201511112344305_weeklyTimesheetSP.Designer.cs">
+      <DependentUpon>201511112344305_weeklyTimesheetSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511131704164_nextMigration.cs" />
+    <Compile Include="Migrations\201511131704164_nextMigration.Designer.cs">
+      <DependentUpon>201511131704164_nextMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511132104172_dropWeeklySummaryStoredProc.cs" />
+    <Compile Include="Migrations\201511132104172_dropWeeklySummaryStoredProc.Designer.cs">
+      <DependentUpon>201511132104172_dropWeeklySummaryStoredProc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511141247272_addingAuthenticationTimeout.cs" />
+    <Compile Include="Migrations\201511141247272_addingAuthenticationTimeout.Designer.cs">
+      <DependentUpon>201511141247272_addingAuthenticationTimeout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511141355013_employeeType.cs" />
+    <Compile Include="Migrations\201511141355013_employeeType.Designer.cs">
+      <DependentUpon>201511141355013_employeeType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511161715264_timerEntryHistory.cs" />
+    <Compile Include="Migrations\201511161715264_timerEntryHistory.Designer.cs">
+      <DependentUpon>201511161715264_timerEntryHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511161828284_timerEntryHistoryDateCreated.cs" />
+    <Compile Include="Migrations\201511161828284_timerEntryHistoryDateCreated.Designer.cs">
+      <DependentUpon>201511161828284_timerEntryHistoryDateCreated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511162005087_employeeTimecardApprovalsByAndTimes.cs" />
+    <Compile Include="Migrations\201511162005087_employeeTimecardApprovalsByAndTimes.Designer.cs">
+      <DependentUpon>201511162005087_employeeTimecardApprovalsByAndTimes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511172357171_employeeJobEquipmentTimer.cs" />
+    <Compile Include="Migrations\201511172357171_employeeJobEquipmentTimer.Designer.cs">
+      <DependentUpon>201511172357171_employeeJobEquipmentTimer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512101848051_truckingTimesheet.cs" />
+    <Compile Include="Migrations\201512101848051_truckingTimesheet.Designer.cs">
+      <DependentUpon>201512101848051_truckingTimesheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512120012051_downtimeReasonsAndMaterials.cs" />
+    <Compile Include="Migrations\201512120012051_downtimeReasonsAndMaterials.Designer.cs">
+      <DependentUpon>201512120012051_downtimeReasonsAndMaterials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512120021020_materialsAndDowntimeReasonsImport.cs" />
+    <Compile Include="Migrations\201512120021020_materialsAndDowntimeReasonsImport.Designer.cs">
+      <DependentUpon>201512120021020_materialsAndDowntimeReasonsImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512152302558_DowntimeTimers.cs" />
+    <Compile Include="Migrations\201512152302558_DowntimeTimers.Designer.cs">
+      <DependentUpon>201512152302558_DowntimeTimers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512161925426_employeeTypesMaxlength.cs" />
+    <Compile Include="Migrations\201512161925426_employeeTypesMaxlength.Designer.cs">
+      <DependentUpon>201512161925426_employeeTypesMaxlength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512162035356_loadtimerFieldsNullable.cs" />
+    <Compile Include="Migrations\201512162035356_loadtimerFieldsNullable.Designer.cs">
+      <DependentUpon>201512162035356_loadtimerFieldsNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512162126571_ClockInAndOutEmployeeAdded.cs" />
+    <Compile Include="Migrations\201512162126571_ClockInAndOutEmployeeAdded.Designer.cs">
+      <DependentUpon>201512162126571_ClockInAndOutEmployeeAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512171850443_computereaseemployee.cs" />
+    <Compile Include="Migrations\201512171850443_computereaseemployee.Designer.cs">
+      <DependentUpon>201512171850443_computereaseemployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602022237381_billtypes.cs" />
+    <Compile Include="Migrations\201602022237381_billtypes.Designer.cs">
+      <DependentUpon>201602022237381_billtypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602022307521_billtypesOnLoadTimers.cs" />
+    <Compile Include="Migrations\201602022307521_billtypesOnLoadTimers.Designer.cs">
+      <DependentUpon>201602022307521_billtypesOnLoadTimers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602101735483_addedCodeToEquipmentServiceType.cs" />
+    <Compile Include="Migrations\201602101735483_addedCodeToEquipmentServiceType.Designer.cs">
+      <DependentUpon>201602101735483_addedCodeToEquipmentServiceType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602161541058_setJobCustomerIDNullable.cs" />
+    <Compile Include="Migrations\201602161541058_setJobCustomerIDNullable.Designer.cs">
+      <DependentUpon>201602161541058_setJobCustomerIDNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602181634339_addCustomerTypes.cs" />
+    <Compile Include="Migrations\201602181634339_addCustomerTypes.Designer.cs">
+      <DependentUpon>201602181634339_addCustomerTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602181706544_addInvoiceNumberandNoteToLoadTimer.cs" />
+    <Compile Include="Migrations\201602181706544_addInvoiceNumberandNoteToLoadTimer.Designer.cs">
+      <DependentUpon>201602181706544_addInvoiceNumberandNoteToLoadTimer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602182301142_ResolveMerge20160218.cs" />
+    <Compile Include="Migrations\201602182301142_ResolveMerge20160218.Designer.cs">
+      <DependentUpon>201602182301142_ResolveMerge20160218.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602191735052_UpdateLoadTimerInvoiceNumber.cs" />
+    <Compile Include="Migrations\201602191735052_UpdateLoadTimerInvoiceNumber.Designer.cs">
+      <DependentUpon>201602191735052_UpdateLoadTimerInvoiceNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimesheetRepository.cs" />
+    <Compile Include="OccurrenceRepository.cs" />
+    <Compile Include="MaterialRepository.cs" />
+    <Compile Include="DowntimeReasonRepository.cs" />
+    <Compile Include="EmployeeTypeRepository.cs" />
+    <Compile Include="BillTypeRepository.cs" />
+    <Compile Include="Migrations\201510231640435_rawSchema.cs" />
+    <Compile Include="Migrations\201510231640435_rawSchema.Designer.cs">
+      <DependentUpon>201510231640435_rawSchema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510232119158_numberFieldIndexes.cs" />
+    <Compile Include="Migrations\201510232119158_numberFieldIndexes.Designer.cs">
+      <DependentUpon>201510232119158_numberFieldIndexes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510240351011_datefilednullable.cs" />
+    <Compile Include="Migrations\201510240351011_datefilednullable.Designer.cs">
+      <DependentUpon>201510240351011_datefilednullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510240352265_dateopenNullable.cs" />
+    <Compile Include="Migrations\201510240352265_dateopenNullable.Designer.cs">
+      <DependentUpon>201510240352265_dateopenNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510262013095_userModelChanges.cs" />
+    <Compile Include="Migrations\201510262013095_userModelChanges.Designer.cs">
+      <DependentUpon>201510262013095_userModelChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510262333012_employeeRefactor.cs" />
+    <Compile Include="Migrations\201510262333012_employeeRefactor.Designer.cs">
+      <DependentUpon>201510262333012_employeeRefactor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510291644414_jobidAddedToCategory.cs" />
+    <Compile Include="Migrations\201510291644414_jobidAddedToCategory.Designer.cs">
+      <DependentUpon>201510291644414_jobidAddedToCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510291702386_jobidAddedToCategoryNotNull.cs" />
+    <Compile Include="Migrations\201510291702386_jobidAddedToCategoryNotNull.Designer.cs">
+      <DependentUpon>201510291702386_jobidAddedToCategoryNotNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510292230235_addingPinToEmployee.cs" />
+    <Compile Include="Migrations\201510292230235_addingPinToEmployee.Designer.cs">
+      <DependentUpon>201510292230235_addingPinToEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510302116206_timers.cs" />
+    <Compile Include="Migrations\201510302116206_timers.Designer.cs">
+      <DependentUpon>201510302116206_timers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhaseRepository.cs" />
+    <Compile Include="CategoryRepository.cs" />
+    <Compile Include="Migrations\201506231644594_InitialCreation.cs" />
+    <Compile Include="Migrations\201506231644594_InitialCreation.Designer.cs">
+      <DependentUpon>201506231644594_InitialCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510211714454_initialCoreTables.cs" />
+    <Compile Include="Migrations\201510211714454_initialCoreTables.Designer.cs">
+      <DependentUpon>201510211714454_initialCoreTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510212158336_added maxlength to fields.cs" />
+    <Compile Include="Migrations\201510212158336_added maxlength to fields.Designer.cs">
+      <DependentUpon>201510212158336_added maxlength to fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleRepository.cs" />
+    <Compile Include="HadcoContext.cs" />
+    <Compile Include="JobRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hadco.Common\Hadco.Common.csproj">
+      <Project>{cbbf03ca-1591-495c-9252-75ec9c160b86}</Project>
+      <Name>Hadco.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506231644594_InitialCreation.resx">
+      <DependentUpon>201506231644594_InitialCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510211714454_initialCoreTables.resx">
+      <DependentUpon>201510211714454_initialCoreTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510212158336_added maxlength to fields.resx">
+      <DependentUpon>201510212158336_added maxlength to fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510231640435_rawSchema.resx">
+      <DependentUpon>201510231640435_rawSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510232119158_numberFieldIndexes.resx">
+      <DependentUpon>201510232119158_numberFieldIndexes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510240351011_datefilednullable.resx">
+      <DependentUpon>201510240351011_datefilednullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510240352265_dateopenNullable.resx">
+      <DependentUpon>201510240352265_dateopenNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510262013095_userModelChanges.resx">
+      <DependentUpon>201510262013095_userModelChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510262333012_employeeRefactor.resx">
+      <DependentUpon>201510262333012_employeeRefactor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510291644414_jobidAddedToCategory.resx">
+      <DependentUpon>201510291644414_jobidAddedToCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510291702386_jobidAddedToCategoryNotNull.resx">
+      <DependentUpon>201510291702386_jobidAddedToCategoryNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510292230235_addingPinToEmployee.resx">
+      <DependentUpon>201510292230235_addingPinToEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510302116206_timers.resx">
+      <DependentUpon>201510302116206_timers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511031843182_modifyDateFieldTimesheet.resx">
+      <DependentUpon>201511031843182_modifyDateFieldTimesheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041334307_addFKtoTimesheetOnJobTimer.resx">
+      <DependentUpon>201511041334307_addFKtoTimesheetOnJobTimer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041346316_timesheetEquipmentIDNullable.resx">
+      <DependentUpon>201511041346316_timesheetEquipmentIDNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041516294_jobTimerEmployeeTimerNullableFields.resx">
+      <DependentUpon>201511041516294_jobTimerEmployeeTimerNullableFields.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041602279_nullableFieldJobTimer.resx">
+      <DependentUpon>201511041602279_nullableFieldJobTimer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511041722092_employeeTimerEntries.resx">
+      <DependentUpon>201511041722092_employeeTimerEntries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511042035080_equipmentUserAndDepartment.resx">
+      <DependentUpon>201511042035080_equipmentUserAndDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511042158079_equipmentTimer.resx">
+      <DependentUpon>201511042158079_equipmentTimer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511050019093_employeeTimerSubmittedFlag.resx">
+      <DependentUpon>201511050019093_employeeTimerSubmittedFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511050027185_employeeTimerDepartment.resx">
+      <DependentUpon>201511050027185_employeeTimerDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511051931318_employeeTimerEntryNotesAndCoordinates.resx">
+      <DependentUpon>201511051931318_employeeTimerEntryNotesAndCoordinates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511051955450_updateEmployeeTimerEntryCoordinates.resx">
+      <DependentUpon>201511051955450_updateEmployeeTimerEntryCoordinates.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511061646471_loadTimerEntities.resx">
+      <DependentUpon>201511061646471_loadTimerEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511092107312_NumbersTable.resx">
+      <DependentUpon>201511092107312_NumbersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511092114330_DateSeries.resx">
+      <DependentUpon>201511092114330_DateSeries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511111300135_EmployeeTimecards.resx">
+      <DependentUpon>201511111300135_EmployeeTimecards.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511111302104_EmployeeTimecardsUpdate.resx">
+      <DependentUpon>201511111302104_EmployeeTimecardsUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511111310506_TimecardUpdate2.resx">
+      <DependentUpon>201511111310506_TimecardUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511112340218_OccurrenceCode.resx">
+      <DependentUpon>201511112340218_OccurrenceCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511112344305_weeklyTimesheetSP.resx">
+      <DependentUpon>201511112344305_weeklyTimesheetSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511131704164_nextMigration.resx">
+      <DependentUpon>201511131704164_nextMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511132104172_dropWeeklySummaryStoredProc.resx">
+      <DependentUpon>201511132104172_dropWeeklySummaryStoredProc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511141247272_addingAuthenticationTimeout.resx">
+      <DependentUpon>201511141247272_addingAuthenticationTimeout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511141355013_employeeType.resx">
+      <DependentUpon>201511141355013_employeeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511161715264_timerEntryHistory.resx">
+      <DependentUpon>201511161715264_timerEntryHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511161828284_timerEntryHistoryDateCreated.resx">
+      <DependentUpon>201511161828284_timerEntryHistoryDateCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511162005087_employeeTimecardApprovalsByAndTimes.resx">
+      <DependentUpon>201511162005087_employeeTimecardApprovalsByAndTimes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511172357171_employeeJobEquipmentTimer.resx">
+      <DependentUpon>201511172357171_employeeJobEquipmentTimer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512101848051_truckingTimesheet.resx">
+      <DependentUpon>201512101848051_truckingTimesheet.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512120012051_downtimeReasonsAndMaterials.resx">
+      <DependentUpon>201512120012051_downtimeReasonsAndMaterials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512120021020_materialsAndDowntimeReasonsImport.resx">
+      <DependentUpon>201512120021020_materialsAndDowntimeReasonsImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512152302558_DowntimeTimers.resx">
+      <DependentUpon>201512152302558_DowntimeTimers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512161925426_employeeTypesMaxlength.resx">
+      <DependentUpon>201512161925426_employeeTypesMaxlength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512162035356_loadtimerFieldsNullable.resx">
+      <DependentUpon>201512162035356_loadtimerFieldsNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512162126571_ClockInAndOutEmployeeAdded.resx">
+      <DependentUpon>201512162126571_ClockInAndOutEmployeeAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512171850443_computereaseemployee.resx">
+      <DependentUpon>201512171850443_computereaseemployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602022237381_billtypes.resx">
+      <DependentUpon>201602022237381_billtypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602022307521_billtypesOnLoadTimers.resx">
+      <DependentUpon>201602022307521_billtypesOnLoadTimers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602101735483_addedCodeToEquipmentServiceType.resx">
+      <DependentUpon>201602101735483_addedCodeToEquipmentServiceType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602161541058_setJobCustomerIDNullable.resx">
+      <DependentUpon>201602161541058_setJobCustomerIDNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602181634339_addCustomerTypes.resx">
+      <DependentUpon>201602181634339_addCustomerTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602181706544_addInvoiceNumberandNoteToLoadTimer.resx">
+      <DependentUpon>201602181706544_addInvoiceNumberandNoteToLoadTimer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602182301142_ResolveMerge20160218.resx">
+      <DependentUpon>201602182301142_ResolveMerge20160218.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602191735052_UpdateLoadTimerInvoiceNumber.resx">
+      <DependentUpon>201602191735052_UpdateLoadTimerInvoiceNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602222043512_addTruckClassifications.resx">
+      <DependentUpon>201602222043512_addTruckClassifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602230000178_addPricesAndPricing.resx">
+      <DependentUpon>201602230000178_addPricesAndPricing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602231723431_updateTruckingClassification.resx">
+      <DependentUpon>201602231723431_updateTruckingClassification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602241644436_IdentityColumnChange.resx">
+      <DependentUpon>201602241644436_IdentityColumnChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602241649410_identity change.resx">
+      <DependentUpon>201602241649410_identity change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602292002140_updatePricing.resx">
+      <DependentUpon>201602292002140_updatePricing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603022220509_updatePricingEntity.resx">
+      <DependentUpon>201603022220509_updatePricingEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603022310250_updatePricing1.resx">
+      <DependentUpon>201603022310250_updatePricing1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603060205369_dateDifferencingFunction.resx">
+      <DependentUpon>201603060205369_dateDifferencingFunction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603072029561_addBreakTimer.resx">
+      <DependentUpon>201603072029561_addBreakTimer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603072137021_resolveMigrations.resx">
+      <DependentUpon>201603072137021_resolveMigrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603112343317_removePricingEntityStatus.resx">
+      <DependentUpon>201603112343317_removePricingEntityStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604042124068_removeIdentityFromSeededEntities.resx">
+      <DependentUpon>201604042124068_removeIdentityFromSeededEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604071608487_addEmployeeLocation.resx">
+      <DependentUpon>201604071608487_addEmployeeLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604280104405_addPitsAndAddPitIDToEmployeeTimerEntry.resx">
+      <DependentUpon>201604280104405_addPitsAndAddPitIDToEmployeeTimerEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604281546432_AddTransportLoadTimers.resx">
+      <DependentUpon>201604281546432_AddTransportLoadTimers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605020459239_removeDepartmentIdentity.resx">
+      <DependentUpon>201605020459239_removeDepartmentIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605021736538_RemovedTransportLoadTimers.resx">
+      <DependentUpon>201605021736538_RemovedTransportLoadTimers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605031642017_AddLoadTimerEntries.resx">
+      <DependentUpon>201605031642017_AddLoadTimerEntries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605042001095_EnsureDepartmentIDUnique.resx">
+      <DependentUpon>201605042001095_EnsureDepartmentIDUnique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605051704255_ChangeLoadTimerEntryNames.resx">
+      <DependentUpon>201605051704255_ChangeLoadTimerEntryNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605101729361_AddConstraintOnTimesheet.resx">
+      <DependentUpon>201605101729361_AddConstraintOnTimesheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605232116567_DownTimeReason.resx">
+      <DependentUpon>201605232116567_DownTimeReason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605251934592_AddEmployeeTimerUniqueConstraint.resx">
+      <DependentUpon>201605251934592_AddEmployeeTimerUniqueConstraint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605311701245_MakeTimesheetEquipmentUseTimeNullable.resx">
+      <DependentUpon>201605311701245_MakeTimesheetEquipmentUseTimeNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606061629127_MakeTimesheetEquipmentUseTimeNonNullable.resx">
+      <DependentUpon>201606061629127_MakeTimesheetEquipmentUseTimeNonNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606072145253_AddedIsDumpedToLoadTimer.resx">
+      <DependentUpon>201606072145253_AddedIsDumpedToLoadTimer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606091957269_AddLocationTable.resx">
+      <DependentUpon>201606091957269_AddLocationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606131539346_RefactoredLocation.resx">
+      <DependentUpon>201606131539346_RefactoredLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606142306240_AddedTrackedByToDepartment.resx">
+      <DependentUpon>201606142306240_AddedTrackedByToDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606152246418_AddTruckClassificationIDToLoadTimers.resx">
+      <DependentUpon>201606152246418_AddTruckClassificationIDToLoadTimers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606161853019_AddCustomerTypeAndComputedRevenueFields.resx">
+      <DependentUpon>201606161853019_AddCustomerTypeAndComputedRevenueFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606212145119_AddTruckerDailyView.resx">
+      <DependentUpon>201606212145119_AddTruckerDailyView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606221612122_AddDowntimeCodeTruckerDailies.resx">
+      <DependentUpon>201606221612122_AddDowntimeCodeTruckerDailies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606222053054_MadeJobPhaseCategoryIDNullable.resx">
+      <DependentUpon>201606222053054_MadeJobPhaseCategoryIDNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606231725298_UpdateTruckerDailiesView.resx">
+      <DependentUpon>201606231725298_UpdateTruckerDailiesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606241937324_AddTruckerDailyID.resx">
+      <DependentUpon>201606241937324_AddTruckerDailyID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606282237368_AddSubDepartmentTimersTimecards.resx">
+      <DependentUpon>201606282237368_AddSubDepartmentTimersTimecards.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606301833080_AlterGetTimespanHoursAndTruckerDaily.resx">
+      <DependentUpon>201606301833080_AlterGetTimespanHoursAndTruckerDaily.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607081820392_AddedUpdatedDateToPricing.resx">
+      <DependentUpon>201607081820392_AddedUpdatedDateToPricing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607081912255_ChangedRunIDtoPhaseID.resx">
+      <DependentUpon>201607081912255_ChangedRunIDtoPhaseID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607102228200_AddPricePerUnit.resx">
+      <DependentUpon>201607102228200_AddPricePerUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607112014483_ChangePricingStartEndTimeType.resx">
+      <DependentUpon>201607112014483_ChangePricingStartEndTimeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607132240141_RemoveCalculatedRevenue.resx">
+      <DependentUpon>201607132240141_RemoveCalculatedRevenue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607151659074_ChangePricingStartDate.resx">
+      <DependentUpon>201607151659074_ChangePricingStartDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607151718261_ChangePricingStartDate1.resx">
+      <DependentUpon>201607151718261_ChangePricingStartDate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607202134371_AddEquipmentTimerEntries.resx">
+      <DependentUpon>201607202134371_AddEquipmentTimerEntries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608172215508_IdentityBugFix.resx">
+      <DependentUpon>201608172215508_IdentityBugFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609191738138_RemoveEmployeeTimerUniqueConstraint.resx">
+      <DependentUpon>201609191738138_RemoveEmployeeTimerUniqueConstraint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609261507529_RemoveAdditionalTimerConstraint.resx">
+      <DependentUpon>201609261507529_RemoveAdditionalTimerConstraint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610131907547_AddSystemGenatedDowntimeFlag.resx">
+      <DependentUpon>201610131907547_AddSystemGenatedDowntimeFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612080301467_AddPlannedQuantities.resx">
+      <DependentUpon>201612080301467_AddPlannedQuantities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612081620403_PreviousQuantity.resx">
+      <DependentUpon>201612081620403_PreviousQuantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612082044348_AddOtherNewQuantity.resx">
+      <DependentUpon>201612082044348_AddOtherNewQuantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612271817070_AddUpdatedTimeToJobTable.resx">
+      <DependentUpon>201612271817070_AddUpdatedTimeToJobTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701042001203_AddInvoiceNumber.resx">
+      <DependentUpon>201701042001203_AddInvoiceNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701101900256_IncreaseInvoiceNumberLength.resx">
+      <DependentUpon>201701101900256_IncreaseInvoiceNumberLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701121805597_AddOverheadCodes.resx">
+      <DependentUpon>201701121805597_AddOverheadCodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701122308252_RemoveTruckerDailyView.resx">
+      <DependentUpon>201701122308252_RemoveTruckerDailyView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701252238038_AddUniqueFilteredConstraints.resx">
+      <DependentUpon>201701252238038_AddUniqueFilteredConstraints.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702092022563_AddDowntimeReasonMobileFlag.resx">
+      <DependentUpon>201702092022563_AddDowntimeReasonMobileFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703061559026_AddSettings.resx">
+      <DependentUpon>201703061559026_AddSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131940061_UpdateApprovalLevel.resx">
+      <DependentUpon>201703131940061_UpdateApprovalLevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703152224009_AddNotes.resx">
+      <DependentUpon>201703152224009_AddNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703201613395_AddNoteTypes.resx">
+      <DependentUpon>201703201613395_AddNoteTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703221841391_IncreaseNoteLength.resx">
+      <DependentUpon>201703221841391_IncreaseNoteLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704122058576_ClockedInStatuses.resx">
+      <DependentUpon>201704122058576_ClockedInStatuses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704171658098_BlankMigration.resx">
+      <DependentUpon>201704171658098_BlankMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704202140447_DailyApprovalAndNotes.resx">
+      <DependentUpon>201704202140447_DailyApprovalAndNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704251832433_DailyApprovalIndex.resx">
+      <DependentUpon>201704251832433_DailyApprovalIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705162127054_AddedNoteTypeProperties.resx">
+      <DependentUpon>201705162127054_AddedNoteTypeProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705162215222_AddedCreateEmployeeID.resx">
+      <DependentUpon>201705162215222_AddedCreateEmployeeID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705241519009_removedTimerTypes.resx">
+      <DependentUpon>201705241519009_removedTimerTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706051740024_ConfigureClockInStatus.resx">
+      <DependentUpon>201706051740024_ConfigureClockInStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803061502493_AddAuthActivities.resx">
+      <DependentUpon>201803061502493_AddAuthActivities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803071609202_AddRoleAuthActivityIndex.resx">
+      <DependentUpon>201803071609202_AddRoleAuthActivityIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121807299_AddRoleAuthActivityDepartmentsTable.resx">
+      <DependentUpon>201803121807299_AddRoleAuthActivityDepartmentsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804101833331_AddAuthActivityKey.resx">
+      <DependentUpon>201804101833331_AddAuthActivityKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805211717224_AddedOpenTimerEntryConstraint.resx">
+      <DependentUpon>201805211717224_AddedOpenTimerEntryConstraint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806281718246_AddedTrackedEntities.resx">
+      <DependentUpon>201806281718246_AddedTrackedEntities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808091647555_AddedAuthorizeNoteToEmployeeTimer.resx">
+      <DependentUpon>201808091647555_AddedAuthorizeNoteToEmployeeTimer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809052123235_addSchedulingRole.resx">
+      <DependentUpon>201809052123235_addSchedulingRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810021511474_AddPitLocation_HerrimanPit.resx">
+      <DependentUpon>201810021511474_AddPitLocation_HerrimanPit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812210437069_AddKeyToPitName.resx">
+      <DependentUpon>201812210437069_AddKeyToPitName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911051834068_AddStatusToPhaseAndCategories.resx">
+      <DependentUpon>201911051834068_AddStatusToPhaseAndCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sql\AddMechanicDowntime.sql" />
+    <Content Include="Sql\GetSuperintendentForemanTimesheets.sql" />
+    <Content Include="Sql\GetTruckerDailiesLoadTimers.sql" />
+    <Content Include="Sql\GetWeeklyTimer.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

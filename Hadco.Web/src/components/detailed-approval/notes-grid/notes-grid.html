@@ -1,0 +1,41 @@
+﻿<div class="row">
+    <div class="columns small-12 small-centered">
+        <div class="row">
+            <div class="columns small-12">
+                <div
+                    ui-grid="ctrl.noteGridOptions"
+                    ng-style="ctrl.gridTableHeight"
+                    ui-grid-pinning
+                    ui-grid-expandable
+                    ui-grid-auto-resize
+                ></div>
+            </div>
+        </div>
+        <div class="row">
+            <!--<div ng-if="ctrl.isTimecardTab && vm.isReadyToResolve" class="columns small-12">-->
+            <div ng-if="ctrl.isTimecardTab" class="columns small-12">
+                <div class="right">
+                    <button
+                        type="button"
+                        ng-click="ctrl.newNote()"
+                        ng-disabled="ctrl.timersDisabled"
+                        class="button tiny radius"
+                        ng-if="ctrl.can('flagEmployeeTimer')"
+                    >
+                        New Note
+                    </button>
+                    
+                    <button
+                        type="button"
+                        ng-click="ctrl.resolveNotes()"
+                        ng-disabled="ctrl.timersDisabled"
+                        class="button tiny radius"
+                        ng-if="ctrl.can('resolveEmployeeTimerFlag')"
+                    >
+                        Resolve All Notes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

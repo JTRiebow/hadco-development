@@ -1,0 +1,1 @@
+import './load-timer-module';

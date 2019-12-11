@@ -1,0 +1,17 @@
+.ht-simple-dialog {
+    max-width: 600px;
+    padding: 50px;
+    
+    .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        
+        > .md-button {
+            font-size: 14px;
+            
+            &:not(:first-child) {
+                margin-left: 1em;
+            }
+        }
+    }
+}

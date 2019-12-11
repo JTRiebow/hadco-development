@@ -1,0 +1,25 @@
+<div class='create-user'>
+	<h2>Truck Classifications</h2>
+	<!-- <a href="/supervisor/admin/create" class='button'>Create Truck Classification</a> -->
+	 <input class="search" type="search" placeholder='Search Truck Classifications...' ng-model='selectedTruckClassification' ng-change="searchChanged(selectedTruckClassification)" typeahead='t.name for t in truckClassifications | filter: $viewValue | limitTo: 8' typeahead-on-select='searchChanged(selectedTruckClassification)'>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+	<table st-table='rowCollection' class='table table-striped'>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Code</th>
+				<!-- <th></th> -->
+			</tr>
+		</thead>
+		<tbody>
+			<tr dir-paginate='t in filteredTruckClassifications = (truckClassifications | filter: selectedTruckClassification) | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+				<td>{{ t.name }}</td>
+				<td>{{ t.code }}</td>
+				<!-- <td><a href="/supervisor/admin/{{t.truckClassificationID}}">edit</a><a ng-click='deleteListItem(t)'>delete</a></td> -->
+				
+			</tr>
+		</tbody>
+	</table>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+
+</div>

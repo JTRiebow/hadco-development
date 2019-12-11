@@ -1,0 +1,126 @@
+<!-- <h3>Edit User</h3> -->
+
+<form class="create-edit-user" name="userForm">
+	<div class="row" ng-if='employee.employeeID'>
+		<h2>{{ employee.name }} --  {{ employee.username }} </h2>
+	</div>
+	<div class="row" ng-if="!employee.employeeID && vm.can('createEmployee')">
+		<div class="columns small-3" ng-class="{error: userForm.nameField.$invalid && submitted}">
+			<label>Name*</label>
+            <input name="nameField" ng-model='employee.name' type="text" required>
+            <small class="error" ng-show="userForm.nameField.$invalid && submitted">Required</small>
+		</div>
+		<div class="columns small-3 end" ng-class="{error: userForm.usernameField.$invalid && submitted}">
+			<label>Username*</label>
+            <input name="usernameField" ng-model='employee.username' type="text" required>
+            <small class="error" ng-show="userForm.usernameField.$invalid && submitted">Required</small>
+		</div>
+	</div>
+	<div class="row" ng-if="!employee.employeeID && vm.can('createEmployee')">
+		<div class="columns small-3" ng-class="{error: userForm.passwordField.$invalid && submitted}">
+			<label>Password*</label>
+            <input name="passwordField" ng-model='employee.password' type="password" ng-minlength="8" required>
+            <small class="error" ng-show="userForm.passwordField.$error.required && submitted">Required</small>
+            <small class="error" ng-show="userForm.passwordField.$error.minlength && submitted">Must be at least 8 characters in length.</small>
+		</div>
+		<div class="columns small-3 end">
+			<label>Pin</label>
+            <input name="pinField" ng-model='employee.pin' type="number">
+		</div>
+	</div>
+	<div class="row" ng-if="!employee.employeeID && vm.can('createEmployee')">
+		<div class="columns small-3 end">
+			<label>Phone</label>
+            <input name="phoneField" ng-model='employee.phone' type="text">
+		</div>
+	</div>
+	<div class='row' ng-if="!employee.employeeID && vm.can('createEmployee')">
+		<div class='columns small-6'>
+			<a href='/human-resources/employees' class='button secondary'>Cancel</a>
+			<button type="submit" ng-click='saveNewUser(employee, userForm)'>Save</button>
+		</div>
+	</div>
+	
+	<div class="row" ng-if='employee.employeeID'>
+		<div class="columns small-6 end">
+			<h4>Role{{ employee.roles.length == 1 ? '' : 's' }}</h4>
+			
+			<oi-select
+				oi-options='r.name for r in roles'
+				ng-model='employee.roles'
+				multiple
+				oi-select-options='{ 
+					closeList: false,
+					editItem: "deleteRole",
+				}'
+				ng-if="vm.canDoAny([ 'addEmployeeRole', 'deleteEmployeeRole' ])"
+			></oi-select>
+			
+			<p ng-if="!vm.canDoAny([ 'addEmployeeRole', 'deleteEmployeeRole' ])">
+				<span ng-repeat="role in employee.roles track by role.roleId">
+					{{ role.name }}{{ !$last ? ',' : '' }}
+				</span>
+				
+				<span ng-if="!employee.roles.length">None</span>
+			</p>
+		</div>
+	</div>
+	
+	<div class="row" ng-if='employee.employeeID'>
+		<div class="columns small-6 end">
+			<h4>Department{{ employee.departments.length == 1 ? '' : 's' }}</h4>
+			
+			<oi-select
+				oi-options='d.name for d in departments | orderBy: "name"'
+				ng-model='employee.departments'
+				multiple
+				oi-select-options='{ closeList: false, editItem: "deleteDepartment" }'
+				ng-if="vm.canDoAny([ 'addEmployeeDepartment', 'deleteEmployeeDepartment' ])"
+			></oi-select>
+			
+			<p ng-if="!vm.canDoAny([ 'addEmployeeDepartment', 'deleteEmployeeDepartment' ])">
+				<span ng-repeat="department in employee.departments track by department.departmentID">
+					{{ department.name }}{{ !$last ? ',' : '' }}
+				</span>
+				
+				<span ng-if="!employee.departments.length">None</span>
+			</p>
+		</div>
+	</div>
+	
+	<div class="row" style='margin-bottom: 3rem;' ng-if='employee.employeeID'>
+		<div class="columns small-6 end">
+			<h4>Supervisor{{ employee.supervisors.length == 1 ? '' : 's' }}</h4>
+			
+			<oi-select
+				oi-options='s.name for s in supervisors'
+				ng-model='employee.supervisors'
+				multiple
+				oi-select-options='{ closeList: false, editItem: "deleteSupervisors" }'
+				ng-if="vm.canDoAny([ 'addEmployeeSupervisor', 'deleteEmployeeSupervisor' ])"
+			></oi-select>
+			
+			<p ng-if="!vm.canDoAny([ 'addEmployeeSupervisor', 'deleteEmployeeSupervisor' ])">
+				<span ng-repeat="supervisor in employee.supervisors track by supervisor.employeeID">
+					{{ supervisor.name }}{{ !$last ? ',' : '' }}
+				</span>
+				
+				<span ng-if="!employee.supervisors.length">None</span>
+			</p>
+		</div>
+	</div>
+
+	<div class="row" ng-if='employee.employeeID'>
+		<div class="columns small-8 end">
+			<a ng-click="returnToPreviousPage()" class='button secondary'>Back</a>
+
+			<button ng-click='newPassword("Password")' ng-if="vm.can('changeEmployeePassword')">Change Password</button>
+
+			<button ng-click='newPassword("Pin")' ng-if="vm.can('changeEmployeePin')">Change Pin</button>
+
+			<button ng-click='newPassword("Username")' ng-if="vm.can('changeEmployeeUsername')">Change Username</button>
+
+			<button ng-click='newPassword("Employee Name")' ng-if="vm.can('changeEmployeeName')">Change Employee Name</button>
+		</div>
+	</div>
+</form>

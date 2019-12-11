@@ -1,0 +1,34 @@
+<div class='create-user'>
+	<h2>GPS Settings</h2>
+    <div class="container">
+        <div class="row">
+            <div class="columns small-2"><br />
+                <label> Select Interval</label>
+                    <select type="text"
+                            ng-model="vm.selectedInterval"
+                            ng-options="interval as interval.name for interval in vm.intervalOptions"
+                            ng-change="vm.intervalChanged()">
+                    </select>
+            </div>
+        </div>
+    </div>
+	<table ng-if="vm.showTable" st-table='rowCollection' class='table table-striped'>
+		<thead>
+			<tr>
+				<th>Department</th>
+				<th>Tracked by Department</th>
+				<th>Tracked by Employee</th>
+				<th>Edit Employees tracked</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat='d in departments'>
+				<td>{{ d.name }}</td>
+				<td><input type="radio" value="1" ng-model="d.trackedBy" ng-change="updateTracking(d)"></td>
+				<td><input type="radio" value="2" ng-model="d.trackedBy" ng-change="updateTracking(d)"></td>
+				<td ng-show="d.trackedBy == 2"><a href="/admin/gps-settings/{{d.departmentID}}">Select Employees</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

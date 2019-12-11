@@ -1,0 +1,20 @@
+<div ng-show="materialId == 'create'"><h3>Create Material</h3></div>
+<div ng-hide="materialId == 'create'"><h3>Edit Material</h3></div>
+
+<form class="create-edit-user">
+	<div class="row">
+		<div class="columns small-6 end">
+			<h4><input focus-me required ng-model='material.name' placeholder='Name' type="text"></h4>
+			<h4><input focus-me required ng-model='material.categoryNumber' placeholder='Category Number' type="text"></h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns small-1 end">
+			<button ng-click='saveMaterial(material)'>Save</button>
+		</div>
+		<div class="columns small-2 end">
+			<a href="/admin/materials" class='button secondary'>Cancel</a>
+		</div>
+	</div>
+
+</form>

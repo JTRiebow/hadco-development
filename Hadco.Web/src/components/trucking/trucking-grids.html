@@ -1,0 +1,116 @@
+<div class="row"> 
+	<div ng-if="::vm.customerType.name =='Trucker Dailies'" class='columns small-3 end'>
+		<h2>{{::vm.customerType.name}}</h2>
+	</div>
+	<div class="columns small-9 end right">
+		<div class="columns small-2 end right">
+			<label> Range:
+				<select type="text" 
+					ng-options='r.name for r in ::vm.ranges track by r.name'
+					ng-model='vm.range'
+					ng-change='vm.rangeChange(vm.range, vm.range.name)'
+					ng-disabled="vm.editingAll">
+				</select>
+			</label>	
+		</div>
+		<div class='columns small-2 end right'>
+            <label> To: </label>
+				<input id="endRangeSelect"
+                       ng-model="vm.range.end" 
+                       datepicker-popup="MM/dd/yyyy" 
+                       show-button-bar="false" 
+                       is-open="vm.endOpened" 
+                       minDate="vm.range.start" 
+                       close-on-date-selection="true"
+                       ng-focus="vm.endOpened = true" 
+                       ng-click="vm.endOpened = true" 
+                       ng-change="vm.dateChange(vm.range, 'end')"
+                       keypress-events enter="vm.dateChange(vm.range, 'end','enter')" 
+                       type="text" 
+					   ng-disabled="vm.editingAll">
+		</div>
+		<div class='columns small-2 end right'>
+            <label>From:</label>
+				<input id="startRangeSelect"
+                       ng-model="vm.range.start" 
+                       maxDate="vm.range.end" 
+                       datepicker-popup="MM/dd/yyyy" 
+                       show-button-bar="false" 
+                       is-open="vm.startOpened" 
+                       close-on-date-selection="true"
+                       ng-focus="vm.startOpened = true" 
+                       ng-click="vm.startOpened = true" 
+                       type="text" 
+                       keypress-events enter="vm.dateChange(vm.range, 'start', 'enter')" 
+                       ng-change="vm.dateChange(vm.range, 'start')"
+					   ng-disabled="vm.editingAll">
+		</div>
+		<div  ng-if="::vm.customerType.name =='Trucker Dailies'" class="columns small-2 end right">
+			<label> Department:
+				<select type="text" 
+					ng-options='d as d.name for d in ::vm.departments'
+					ng-model='vm.department'
+					ng-change='vm.departmentChange(vm.department)'
+					ng-disabled="vm.editingAll">
+				</select>
+			</label>	
+		</div>
+		<div ng-if="vm.page == 'reporting'" class="columns small-2 end right">
+			<label> Display By:
+				<select type="text" 
+					ng-options='d.name for d in ::vm.displays track by d.name'
+					ng-model='vm.display'
+					ng-change='vm.displayChanged(vm.display)'>
+				</select>
+			</label>
+		</div>
+		<div ng-if="vm.page == 'reporting' && vm.customerType.name !== 'Quantity'" class="columns small-2 right">
+			<label> Truck #:
+				<select type="text" 
+					ng-options='t.name as t.name for t in ::vm.trucks'
+					ng-option="'Truck #'" 
+					ng-model='vm.truck'
+					ng-change='vm.truckChanged(vm.truck)'>
+				</select>
+			</label>
+		</div>
+		<div ng-if="vm.customerType.name === 'Quantity'" class="columns small-2 right">
+			<label>Customer
+				<select type="text" 
+					ng-options='c.name as c.name for c in ::vm.customers'
+					ng-model='vm.customer'
+					ng-change='vm.customerChanged(vm.customer)'>
+				</select>
+			</label>
+		</div>
+		<div ng-if="vm.customerType.name !== 'Metro' && vm.customerType.name !== 'Trucker Dailies'" class="columns small-2 right">
+			<label> Bill Type
+				<select type="text" 
+					ng-options='b as b.name for b in ::vm.dropdownLists.billTypes track by b.name' 
+					ng-model='vm.billType'
+					ng-change='vm.billTypeChanged(vm.billType)'>
+				</select>
+			</label>
+		</div>
+	</div>	
+	<div ng-if="vm.page === 'pricing'" class="columns small-3 end">
+		<button class="button primary" ng-click="vm.editPrice()">Add {{vm.customerType.key}}</button>
+	</div>
+</div>
+
+<div
+	class="grid"
+	style="height: 75vh"
+	id="grid"
+	ui-grid="vm.gridOptions"
+	ui-grid-pagination
+	ui-grid-pinning
+	ui-grid-exporter
+></div>
+
+<!-- <div ng-if="::vm.customerType.name == 'Trucker Dailies'" class="trucker-dailies-controls">
+	<md-button ng-click="vm.editAll()" ng-show="!vm.editingAll && vm.canEditRow" class="md-primary md-raised">Edit All</md-button>
+	<md-button ng-click="vm.confirmSaveAll()" ng-show="vm.editingAll && vm.canEditRow" class="md-primary md-raised">Save All</md-button>
+	<md-button ng-click="vm.cancelAll()" ng-show="vm.editingAll && vm.canEditRow" class="md-primary md-raised">Cancel</md-button>
+</div> -->
+

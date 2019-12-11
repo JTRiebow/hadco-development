@@ -1,0 +1,18 @@
+<div class='create-user'>
+	<div class="row">
+		<div class="columns small-6">
+			<h2>Employees</h2>
+			
+		</div>
+		<div class="columns small-6">
+			<a href='/human-resources/employee/create' class='button right' ng-if="vm.can('createEmployee')">Add Employee</a>
+		</div>
+	</div>
+	<!-- <a href="/human-resources/employee/create" class='button'>Create Employee</a> -->
+	<input focus-me ng-model='vm.searchText' type="text" placeholder='Search Employees...' ng-change="refreshData()">
+    <div class="clearfix"></div>
+    <div class="search-grid-container">
+        <div ui-grid="vm.gridOptions" class="grid"></div>
+    </div>
+
+</div>

@@ -1,0 +1,76 @@
+<form class="edit-role-permissions">
+    <p class="enable-control">
+        <span ng-if="vm.activity">
+            Can someone who is a
+            <b>{{ vm.role.name }}</b>
+            {{ vm.activity.name }}?
+        </span>
+        <span ng-if="!vm.activity">{{ vm.roleAuth.active ? 'Enable' : 'Disable' }}</span>
+        
+        <md-switch
+            class="md-primary"
+            ng-model="vm.roleAuth.active"
+            tabindex="0"
+            aria-label="
+                {{ vm.roleAuth.roleAuthActivityID ? 'enable' : 'disable' }}
+                {{ vm.activity ? vm.activity.name : 'everything' }} for
+                {{ vm.role.name }}
+            "
+            ng-change="vm.emitChanges()"
+            ng-disabled="vm.disable"
+            md-no-ink
+        ></md-switch>
+    </p>
+    
+    <div class="radio-button-list">
+        <p>
+            What departments can a 
+            <b>{{ vm.role.name }}</b>
+            do
+            {{ vm.activity ? 'this' : 'everything' }}
+            for?
+        </p>
+        
+        <md-radio-group
+            class="md-primary"
+            ng-model="vm.roleAuth.affectedDepartments"
+            ng-change="vm.updateDepartment()"
+            ng-disabled="!vm.roleAuth.active || vm.disable"
+        >
+            <md-radio-button value="all">All departments</md-radio-button>
+            <md-radio-button value="own">Departments they're in</md-radio-button>
+            <md-radio-button value="some">
+                Specific departments{{
+                    vm.roleAuth.affectedDepartments == 'some' ? ':' : ''
+                }}
+            </md-radio-button>
+        </md-radio-group>
+    </div>
+    
+    <md-chips
+        ng-model="vm.roleAuth.specificDepartments"
+        md-on-add="vm.addDepartment($chip)"
+        md-on-remove="vm.removeDepartment($chip)"
+        md-require-match="true"
+        readonly="vm.roleAuth.affectedDepartments != 'some' || vm.disable"
+        ng-if="vm.roleAuth.affectedDepartments == 'some' || vm.roleAuth.departments.length"
+    >
+        <md-autocomplete
+            class="md-primary"
+            placeholder="Start typing to add a department"
+            md-items="department in vm.filterDepartments(departmentLookup)"
+            md-item-text="department.name"
+            md-search-text="departmentLookup"
+            md-no-cache
+            md-autoselect
+        >
+            {{ department.name }}
+        </md-autocomplete>
+        
+        <md-chip-template>
+            <span>
+                {{ $chip.name }}
+            </span>
+        </md-chip-template>
+    </md-chips>
+</form>

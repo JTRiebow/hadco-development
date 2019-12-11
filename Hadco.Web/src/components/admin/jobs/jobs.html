@@ -1,0 +1,27 @@
+<div class='create-user'>
+	<h2>Jobs</h2>
+	<input ng-model='search' type="text" placeholder='Search Jobs...'>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+	<table st-table='rowCollection' class='table table-striped'>
+		<thead>
+			<tr>
+				<th>Job Number</th>
+				<th>Job</th>
+				<th>Address</th>
+				<th>City</th>
+				<th>State</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr dir-paginate='j in jobs | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+				<td><a href="/admin/job/{{j.jobID}}/phases">{{ j.jobNumber }}</a></td>
+				<td>{{ j.name }}</a></td>
+				<td>{{ j.address1 }}</a></td>
+				<td>{{ j.city }}</td>
+				<td>{{ j.state }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+
+</div>

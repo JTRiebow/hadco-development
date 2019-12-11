@@ -1,0 +1,94 @@
+<form action="">
+	<table ng-if='openEquipment.length > 0' class="shop table-bordered table-hover table-condensed">
+		<tr  style="font-weight: bold">
+			<td style='width: 13%'>Equipment</td>
+			<td style='width: 13%'>RSPD</td>
+			<td style='width: 13%'>Closed/ Open</td>
+			<td style='width: 50%'>Work Performed</td>
+		</tr>
+
+		<tr ng-repeat="e in openEquipment">
+
+			<td>
+				<input required type="text" ng-model='e.equipment' placeholder='Equipment' typeahead='q as q.equipmentNumber for q in typeaheadEquipment($viewValue)' typeahead-loading='loadingEquipment' typeahead-no-results='noResults' class='form-control' >
+				<i ng-show='loadingEquipment'></i>
+				<div ng-show='noResults'>
+					<i></i> No Results Found
+				</div>
+			</td>
+			<td>
+				<select required type='text' ng-model='e.rspd' ng-options='r.name for r in rspdDrop'>
+					<option value="" disabled>Select</option>
+				</select>
+			</td>
+			<td>
+				<select required type='text' ng-model='e.openClosed' ng-options='s.name for s in trueFalse'>
+					<option value="" disabled>Select</option>
+				</select>
+			</td>
+			<td>
+				<input required type="text" ng-model='e.workPerformed'>
+			</td>
+
+			<td>
+				<button ng-click='removeEquipment($index)'>Remove</button>
+			</td>
+		</tr>
+	</table>
+	<div class="row">
+		<div class="columns small-10">
+			<button type='button' class='addJob' ng-click='addEquipment()'>Add Equipment</button>
+		</div>
+		<div class="columns small-1">
+			<a href="/employee/clock-in" class='button right'>Cancel</a>
+		</div>
+		<div class="columns small-1">
+			<button class='addJob right' ng-click='saveAllEquipment(openEquipment)'>Save</button>
+		</div>
+	</div>
+</form>
+
+
+
+
+
+
+<!-- <form class='equipment-track'>
+	<div class="row equipment-options">
+		<h1 class='column medium-6 text-left title'>HADCO</h1>
+		<h1 class='column medium-6 text-right title'>James Johnson</h1>
+		<div class="column small-2">
+			<h4>Equipment</h4>
+			<select type="text" ng-model='myFile' ng-options='e.name for e in equipmentDrop'>
+			</select>
+		</div>
+		<div class="column small-2">
+			<h4>RSPD</h4>
+			<select type="text" ng-model='myFile' ng-options='e.name for e in rspdDrop'>
+			</select>
+		</div>
+		<div class="column small-2">
+			<h4>HADCO.SHOP</h4>
+			<select type="text" ng-model='myFile' ng-options='s.name for s in shopDrop'>
+			</select>
+		</div>
+		<div class="column small-4">
+			<h4>Work Performed</h4>
+			<input type="text">
+		</div>
+		<div class="column small-2">
+			<h4>Closed/Open</h4>
+			<select type="text" ng-model='myFile' ng-options='o.name for o in openDrop'>
+			</select>
+		</div>
+	</div>
+
+	<div class="row cancel-and-save">
+		<div class="column small-10">
+			<a href="/employee/clock-in" class='button secondary'>Cancel</a>
+		</div>
+		<div class="column small-2">
+			<a ng-click='saveEquipment()' class='button success save-equipment'>Save</a>
+		</div>
+	</div>
+</form> -->

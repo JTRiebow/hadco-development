@@ -1,0 +1,7 @@
+<h4 align="center">Select date of new timesheet for </h4><h4 align="center">{{foreman.name}}</h4>
+<div class="row">
+<select align="center" ng-options="d for d in orderedDateList = ( dateList | orderBy: 'd')" ng-model="date"></select>
+</div>
+<button class="button" ng-click="confirm(date)">Submit</button>
+<button type='button' class="button secondary" ng-click="cancel()">Cancel</button>
+<a class="close-reveal-modal" ng-click="cancel()">&#215;</a>

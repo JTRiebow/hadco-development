@@ -1,0 +1,249 @@
+
+<div class="row error-message" ng-show="showWarning">
+	<small class="error columns small-5">Error: Load Timers Exceed Clocked In Time</small>
+</div> 
+
+<div class="wide-table"><table class="table-bordered table-hover table-condensed truck-table table wide-table">
+	<thead>
+		<tr style="font-weight: bold">
+			<th ng-repeat="c in columns" style='width: 100px'>{{c.name}}</th>
+			
+			<th class="fixed-header first"><th class="fixed-header first-header">Edit </th></th>
+		</tr>
+	</thead>
+	<tbody ng-repeat="load in timersArray">
+		<form class="css-form" nonvalidate>
+		<tr>
+			<!-- <td>
+				<div class="expand-on-hover">
+					{{ load.loadTimerID}}
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.truck.equipmentNumber }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input required type="text"  ng-model='load.truck.equipmentNumber' typeahead='truck.equipmentNumber for truck in trucks | filter: $viewValue | limitTo: 8' typeahead-on-select='checkTruck($item, $index)'>
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.trailer.equipmentNumber }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input type="text" ng-model='load.trailer.equipmentNumber' typeahead='trailer.equipmentNumber for trailer in trailers | filter: $viewValue | limitTo: 8' typeahead-on-select='checkTrailer($item, $index)'>
+				</div>
+			</td>
+			<td ng-hide="dep.transport">
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.pup.equipmentNumber }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input type="text" ng-model='load.pup.equipmentNumber' typeahead='pup.equipmentNumber for pup in trailers | filter: $viewValue | limitTo: 8' typeahead-on-select='checkPupTrailer($item, $index)'>
+				</div>
+			</td>
+			<td>	
+				<div ng-hide='load.editLoad'>
+					{{load.loadTime | date: "yyyy-MM-dd"}}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input ng-model="load.loadTime" datepicker-popup is-open="startTime.opened" ng-focus="startTime.opened = true" min-date="timesheet.preTripStart" max-date="timesheet.postJobEnd" ng-click="startTime.opened = true" type="text">
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{load.loadTime | date: "h:mm a"}}-->
+					<!-- <timepicker class="timepicker" min-time="timesheet.preTripStart" max-time="timesheet.postJobEnd"  mousewheel="false" ng-model="load.loadTime" value="load.loadTime" readonly-input="true" showMeridian="false" ></timepicker> -->
+				<!-- </div>
+				<div ng-show='load.editLoad'>-->
+					<!-- <input required type="text"  ng-model='load.loadTime' bs-timepicker data-length="1" data-minute-step="1"> -->
+					<!--<timepicker class="timepicker" min-time="timesheet.preTripStart" max-time="timesheet.postJobEnd" mousewheel="false" ng-model="load.loadTime" value="load.loadTime"></timepicker>
+				</div>
+			</td>
+			<td>
+				<div ng-hide='load.editLoad'>
+					{{load.dumpTime | date: "yyyy-MM-dd"}}
+				</div>
+				<div ng-show="load.editLoad">
+					<input ng-model="load.dumpTime" datepicker-popup is-open="stopTime.opened" ng-focus="stopTime.opened = true" min-date="timesheet.preTripStart" max-date="timesheet.postJobEnd" ng-click="stopTime.opened = true" type="text">
+				</div>	
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{load.dumpTime | date: "h:mm a"}}
+				</div>
+				<div ng-show='load.editLoad'>-->
+					<!-- <input required type="text"  ng-model='load.dumpTime' bs-timepicker data-length="1" data-minute-step="1"> -->
+					<!--<timepicker class="timepicker" min-time="timesheet.preTripStart" max-time="timesheet.postJobEnd" mousewheel="false" ng-model="load.dumpTime" value="load.dumpTime"></timepicker>
+				</div>
+			</td> -->
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{load.startLocation}}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input required type="text"  ng-model='load.startLocation'>
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.endLocation }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input required type="text"  ng-model='load.endLocation'>
+				</div>
+			</td>
+			<td ng-hide="dep.transport">
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.ticketNumber }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input type="text" ng-model='load.ticketNumber'>
+				</div>
+			</td>
+			<td ng-hide="dep.transport">
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.tons }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input type="text"  ng-model='load.tons'>
+				</div>
+			</td>
+			<td ng-hide="dep.transport">
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.material.name }}
+				</div>
+				<div ng-show='load.editLoad'>
+				<input required type="text"  ng-model='load.material.name' typeahead='m.name for m in materials | filter: $viewValue | limitTo: 8' typeahead-on-select='checkMaterial($item, $index)'>
+				</div>
+			</td>
+			<td ng-show="dep.transport">
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.loadEquipment.equipmentNumber || load.loadEquipmentID}}
+				</div>
+				<div ng-show='load.editLoad'>
+				<input required type="text"  ng-model='load.loadEquipment' typeahead='e as e.name for e in equipmentList | filter: $viewValue | limitTo: 8' typeahead-on-select='checkEquipment($item, $index)'>
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.job.jobNumber }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input required type="text" value="load.job.jobNumber"  ng-model='load.job.jobNumber' typeahead='j.jobNumber for j in availableJobs | filter: $viewValue | limitTo: 8' typeahead-on-select='checkJob($item, $index)'>
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.phase.phaseNumber }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input required type="text"  ng-disabled="!load.job.jobNumber" ng-model='load.phase.phaseNumber' typeahead='p.phaseNumber for p in newJob[$index].phases | filter: $viewValue | limitTo: 8' typeahead-on-select='checkPhase($item, $index)'>
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.category.categoryNumber }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input required type="text" ng-disabled="!load.phase.phaseNumber || !load.job.jobNumber" ng-model='load.category.categoryNumber' typeahead='c.categoryNumber for c in newJob.categories | filter: $viewValue | limitTo: 8' typeahead-on-select='checkCategory($item, $index)'>
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" >
+					{{ load.totalHours}}
+				</div>
+			</td>
+			<td ng-hide="dep.transport">
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.billType.name }}
+				</div>
+				<div ng-show='load.editLoad'>
+				<select type="text"  ng-model='load.billType' ng-options='b.name for b in billTypes track by b.name' ng-change='checkBillType($item, $index)'></select>
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.invoiceNumber}}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input type="text"  ng-model='load.invoiceNumber'>
+				</div>
+			</td>
+			<td>
+				<div class="expand-on-hover" ng-hide='load.editLoad'>
+					{{ load.note }}
+				</div>
+				<div ng-show='load.editLoad'>
+					<input type="text"  ng-model='load.note'>
+				</div>
+			</td>
+			<td class="fixed-header">
+				<div ng-show='load.editLoad'>
+					<button ng-hide="dep.transport"
+						ng-disabled="
+							!load.truck.equipmentNumber ||
+							!load.job.jobNumber ||
+							!load.phase.phaseNumber ||
+							!load.category.categoryNumber ||
+							!load.tons ||
+							!load.loadTime ||
+							!load.dumpTime ||
+							!load.material.name ||
+							!load.endLocation ||
+							!load.startLocation ||
+							!load.billType" 
+						ng-click='saveLoad(load, $index)' 
+						type="submit" 
+						class="tiny"> save </button>
+						<button ng-show="dep.transport"
+						ng-disabled="
+							!load.truck.equipmentNumber ||
+							!load.job.jobNumber ||
+							!load.phase.phaseNumber ||
+							!load.category.categoryNumber ||
+							!load.loadTime ||
+							!load.dumpTime ||
+							!load.loadEquipment ||
+							!load.endLocation ||
+							!load.startLocation" 
+						ng-click='saveLoad(load, $index)' 
+						type="submit" 
+						class="tiny"> save </button>
+					<button ng-click="clearEdits(load, $index)" class="tiny secondary"> cancel </button>
+				</div>
+				<div ng-hide="load.editLoad">
+					<button class="tiny" ng-click="viewEditLoadFields(load, $index)" ng-hide="load.deleteConfirm">Edit</button>
+					<button type="button" ng-click="load.deleteConfirm = true" ng-hide="load.deleteConfirm" class="tiny secondary"> delete </button>
+					<button type="button" ng-show="load.deleteConfirm" ng-click="deleteLoad($index, load); load.editLoad = false" class="tiny secondary"> confirm delete </button>
+					<button type="button" ng-show="load.deleteConfirm" ng-click="load.editLoad  = false ; load.deleteConfirm = false" class="tiny"> cancel </button>
+				</div>  
+			</td>
+		</tr>
+		</form>
+	</tbody>
+	<tfoot>
+		<tr ng-hide="showWarning">
+			<td ng-hide="dep.transport" colspan="16"></td>
+			<td ng-show="dep.transport" colspan="13"></td>
+			<td>Total: {{getTotal(loadTimers, 'totalHours')}}</td>
+			<td colspan="3"></td>
+			<td class="fixed-header  last"><th class="fixed-header last-header"></th></td>
+		</tr>
+		<tr ng-show="showWarning">
+			
+			<td ng-hide="dep.transport" colspan="16"></td>
+			<td ng-show="dep.transport" colspan="13"></td>
+			<td class="warning error ">Total: {{getTotal(loadTimers, 'totalHours')}}</td>
+			<td class="warning" colspan="3"></td>
+			<td class=" fixed-header last"><td class="fixed-header last-header warning"></td></td>
+		</tr>
+	</tfoot>
+</table>
+</div>
+<button class="button primary" ng-click='addLoad(); loadTimers[loadTimers.length - 1].editLoad = true;'>Add New Load</button>
+
+
+
+

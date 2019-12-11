@@ -1,0 +1,20 @@
+<form>
+	<h3 class="text-center">Add Occurrence(s)</h3>
+	
+    <div ng-if="!isDetailedApprovalPage">
+        <label>Select Employee</label>
+        <select ng-model="newOccurrence.employeeTimerID" ng-options="e.employeeTimerID as e.employeeName for e in availableEmployees"></select>
+    </div>
+
+    <label>Select Occurrence(s)</label>
+    <oi-select class="select-occurrences end" oi-options='o.name for o in availableOccurrences' ng-model='newOccurrence.occurrences' multiple></oi-select>
+
+    <div ng-if="!isDetailedApprovalPage && isNoteRequired">
+        <label>Note:</label>
+        <textarea ng-model="newOccurrence.note"></textarea>
+    </div>
+
+    <button class="button" ng-click="confirm(newOccurrence)">Confirm</button>
+    <button type='button' class="button secondary" ng-click="cancel()">Cancel</button>
+    <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+</form>

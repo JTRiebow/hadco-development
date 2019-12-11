@@ -1,0 +1,18 @@
+<hr />
+<h4><i class="fa fa-caret-down" ng-click="hideLoads = !hideLoads" aria-hidden="true"></i> Loads and Downtime Timers</h4>
+<div ng-if="!hideLoads" class="row">
+    <div class="columns small-12">
+        <div class="row error-message" ng-show="showWarning">
+            <small class="error columns small-5">Error: Load Timers Exceed Clocked In Time</small>
+        </div>
+        <div ui-grid="truckingGridOptions"
+             ui-grid-pinning
+             ui-grid-tree-view
+             ui-grid-auto-resize
+             class="grid"
+             ng-style="gridTableHeight">
+        </div>
+        <button class="button primary tiny radius buttons-below-grid" ng-disabled="!canEditRow || timersDisabled" ng-click='!canEditRow || addLoad(timerTypes.downtime)'>Add New Downtime</button>
+        <button class="button primary tiny radius buttons-below-grid" ng-disabled="!canEditRow || timersDisabled" ng-click='!canEditRow || addLoad(timerTypes.load)'>Add New Load</button>
+    </div>
+</div>

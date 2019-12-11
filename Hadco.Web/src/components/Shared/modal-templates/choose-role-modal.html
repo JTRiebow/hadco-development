@@ -1,0 +1,29 @@
+﻿<div class="text-center">
+    <h3>Choose role</h3>
+    <form>
+        <div class="text-left roles-checkboxes">
+            <div ng-if="vm.isSupervisor">
+                <input type="checkbox" ng-model="vm.supervisor"/>
+                <span>Supervisor</span>
+            </div>
+
+            <div ng-if="vm.isManager">
+                <input type="checkbox" ng-model="vm.manager"/>
+                <span>Manager</span>
+            </div>
+
+            <div ng-if="vm.isBilling">
+                <input type="checkbox" ng-model="vm.billing"/>
+                <span>Billing</span>
+            </div>
+
+            <div ng-if="vm.isAccounting">
+                <input type="checkbox" ng-model="vm.accounting" />
+                <span>Accounting </span>
+            </div>
+        </div>
+
+        <button class="button" ng-click="vm.save()">Save</button>
+        <button type='button' class="button secondary" ng-click="vm.cancel()">Cancel</button>
+    </form>
+</div>

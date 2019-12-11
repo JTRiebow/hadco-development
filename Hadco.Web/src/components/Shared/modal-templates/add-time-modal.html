@@ -1,0 +1,40 @@
+<form>
+	<h2 class='text-center'>Add Timer</h2>
+	<div class="row">
+		<div class="columns small-6">
+			<label>Clock in date:
+				<input required class="input-time" ng-model='time.clockIn' type='date'/>
+			</label>
+		</div>
+
+		<div class="columns small-6">
+			<label>Time: 
+				<input required class="input-time" ng-model='time.clockIn' bs-timepicker data-length="1" data-minute-step="1"/>
+			</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns small-6">
+			<label>Clock out date: 
+				<input required class="input-time" ng-model='time.clockOut' type='date' />
+			</label>
+		</div>
+
+		<div class="columns small-6">
+			<label>Time: 
+				<input required class="input-time" ng-model='time.clockOut' bs-timepicker data-length="1" data-minute-step="1"/>
+			</label>
+		</div>
+	</div>
+
+    <div class="row">
+        <div ng-if="pitList" class="small-5 columns end">
+            <label> Select Pit: <select ng-model="time.pitID" ng-options="p.pitID as p.name for p in pitList"></select></label>
+        </div>
+    </div>
+	<div class='text-center'>
+		<button class="button submit-times text-center" ng-click="confirm(time)">Submit</button>
+	</div>
+
+	<a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+</form>

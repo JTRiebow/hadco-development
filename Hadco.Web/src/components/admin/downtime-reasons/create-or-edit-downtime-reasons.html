@@ -1,0 +1,26 @@
+<div ng-show="create"><h3>Create Downtime Reason</h3></div>
+<div ng-hide="create"><h3>Edit Downtime Reason</h3></div>
+
+<form class="create-edit-user">
+    <div class="row">
+        <div class="columns small-6 end">
+            <h4><input  focus-me required ng-model='downtimeReason.description' placeholder='Name' type="text"></h4>
+            <h4><input  maxlength='5' focus-me required ng-model='downtimeReason.code' placeholder='Code' type="text"></h4>
+            <h4><input  focus-me required ng-model='downtimeReason.jobNumber' placeholder='Job Number' type="text"></h4>
+            <h4><input  focus-me required ng-model='downtimeReason.phaseNumber' placeholder='Phase Number' type="text"></h4>
+            <h4><input  focus-me required ng-model='downtimeReason.categoryNumber' placeholder='Category Number' type="text"></h4>
+            <h6><input  focus-me ng-model='downtimeReason.useLoadJob' placeholder='Use Load Job' type="checkbox"> Use Load Job</h6>
+            <h6><input  focus-me ng-model='downtimeReason.useLoadPhase' placeholder='Use Load Phase' type="checkbox"> Use Load Phase</h6>
+            <h6><input  focus-me ng-model='downtimeReason.useLoadCategory' placeholder='Use Load Category' type="checkbox"> Use Load Category</h6>
+        </div> 
+    </div>
+    <div class="row">
+        <div class="columns small-1 end">
+            <button ng-click='saveDowntimeReason(downtimeReason)'>Save</button>
+        </div>
+        <div class="columns small-2 end">
+            <a href="/admin/downtime-reasons" class='button secondary'>Cancel</a>
+        </div>
+    </div>
+
+</form>

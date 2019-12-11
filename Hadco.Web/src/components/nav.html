@@ -1,0 +1,169 @@
+﻿<aside class="left-off-canvas-menu">
+    <accordion close-others="true">
+        <ul>
+            <li class="no-bullet" ng-if="vm.can('viewTimeCard')">
+                <a class="left-off-canvas-toggle" href="/employee/clock-in">
+                    Time Clock
+                </a>
+            </li>
+
+            <accordion-group ng-if="vm.canSeeTimerNav()">
+                <accordion-heading>
+                    Timers
+                    <span class="right">+</span>
+                </accordion-heading>
+
+                <ul class="off-canvas-submenu no-bullet">
+                    <li ng-if="vm.can('viewAccountingTimers')">
+                        <a class="left-off-canvas-toggle" href="/accounting/timer/approval">
+                            Timers - Accounting
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewBillingTimers')">
+                        <a class="left-off-canvas-toggle" href="/billing/timer/approval">
+                            Timers - Billing
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewSupervisorTimers')">
+                        <a class="left-off-canvas-toggle" href="/supervisor/timer/approval">
+                            Timers - Supervisor
+                        </a>
+                    </li>
+                    <li ng-if="false">
+                        <a class="left-off-canvas-toggle" href="/supervisor/timesheet">
+                            Timesheet
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewForemenTimesheets')">
+                        <a class="left-off-canvas-toggle" href="/supervisor/superintendent">
+                            Foremen Timesheets
+                        </a>
+                    </li>
+                    <li ng-if="vm.canAccessCSV()">
+                        <a class="left-off-canvas-toggle" href="/downloadTimers">
+                            Download CSVs
+                        </a>
+                    </li>
+                </ul>
+            </accordion-group>
+
+            <accordion-group ng-if="vm.canSeeHrNav()">
+                <accordion-heading>
+                    Human Resources
+                    <span class="right">+</span>
+                </accordion-heading>
+
+                <ul class="off-canvas-submenu no-bullet">
+                    <li ng-if="vm.can('viewEmployeeList')">
+                        <a class="left-off-canvas-toggle" href="/human-resources/employees">
+                            Employees
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewSupervisors')">
+                        <a class="left-off-canvas-toggle" href="/human-resources/supervisors">
+                            Supervisors
+                        </a>
+                    </li>
+                </ul>
+            </accordion-group>
+
+            <li class="no-bullet" ng-if="vm.can('viewTMCrushing')">
+                <a class="left-off-canvas-toggle" href="/supervisor/TMCrushing/report">
+                    TM Crushing
+                </a>
+            </li>
+
+            <accordion-group ng-if="vm.canSeeTruckingNav()" >
+                <accordion-heading>
+                    Trucking
+                    <span class="right">+</span>
+                </accordion-heading>   
+
+                <ul class="off-canvas-submenu no-bullet">
+                    <li ng-if="vm.can('viewTruckerDailies')">
+                        <a class="left-off-canvas-toggle" href="/trucker-dailies">
+                            Trucker Dailies
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewTruckingPricing')">
+                        <a class="left-off-canvas-toggle" href="/pricing">
+                            Pricing
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewTruckingReporting')">
+                        <a class="left-off-canvas-toggle" href="/reporting">
+                            Reporting
+                        </a>
+                    </li>
+                </ul>
+            </accordion-group>
+
+            <accordion-group ng-if="vm.canAccessAdmin()">
+                <accordion-heading>
+                    Admin
+                    <span class="right">+</span>
+                </accordion-heading>   
+                
+                <ul class="off-canvas-submenu no-bullet">
+                    <!-- <li><a class="left-off-canvas-toggle" href="">Category</a></li>  -->
+                    <li ng-if="vm.can('viewDowntimeReasons')">
+                        <a class="left-off-canvas-toggle" href="/admin/downtime-reasons">
+                            Downtime Reasons
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewGpsSettings')">
+                        <a class="left-off-canvas-toggle" href="/admin/gps-settings">
+                            GPS Settings
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewJobs')">
+                        <a class="left-off-canvas-toggle" href="/admin/jobs">
+                            Jobs
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewMaterials')">
+                        <a class="left-off-canvas-toggle" href="/admin/materials">
+                            Materials
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('viewOccurrences')">
+                        <a class="left-off-canvas-toggle" href="/admin/occurrences">
+                            Occurrences
+                        </a>
+                    </li>
+                    <li ng-if="vm.can('editPermissions')">
+                        <a class="left-off-canvas-toggle" href="/admin/roles">
+                            Roles
+                        </a>
+                    </li>
+                    <!-- <li><a class="left-off-canvas-toggle" href="">Phase</a></li> -->
+                    <li ng-if="vm.can('viewTruckingClassifications')">
+                        <a class="left-off-canvas-toggle" href="/admin/trucking-classifications">
+                            Trucking Classifications
+                        </a>
+                    </li>
+                    <!-- <li><a href="/supervisor/units">Units</a></li> -->
+                </ul>
+            </accordion-group>
+
+            <li class="no-bullet" ng-if="android">
+                <a
+                    class="left-off-canvas-toggle"
+                    href="https://rink.hockeyapp.net/apps/1d058d835d1e400f9cfab82f9f7c1315"
+                >
+                    Get it on Android
+                </a>
+            </li>
+            <li class="no-bullet" ng-if="ios">
+                <a
+                    class="left-off-canvas-toggle"
+                    href="https://rink.hockeyapp.net/apps/30b40d2ff9974175940c76a43dfef45a"
+                >
+                    Get it on iOS
+                </a>
+            </li>
+        </ul>
+    </accordion>
+</aside>
+
+<a href="#" class="exit-off-canvas"></a>

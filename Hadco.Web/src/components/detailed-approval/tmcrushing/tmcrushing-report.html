@@ -1,0 +1,106 @@
+<div class="row">
+	<h2 class='columns small-6'>TM Crushing</h2>
+	<h2 class="columns small-2">
+		Plant Hours
+	</h2>
+	<div class='columns small-4'>
+		<table>
+			<thead>
+				<tr>
+					<th>Production Hours</th>
+					<th>Scheduled Maint. Hours</th>
+					<th>Downtime Hours</th>
+					<th>Total Hours</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>9</td>
+					<td>2</td>
+					<td>2</td>
+					<td>13</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class='row'>
+	<div class='columns small-8'>
+		<h3>Production</h3>
+		<table class="shop table-bordered table-hover table-condensed">
+			<tr  style="font-weight: bold">
+				<td>Product</td>
+				<td>Goal</td>
+				<td>Tons Produced</td>
+				<td>Time</td>
+				<td>Delete</td>
+			</tr>
+
+			
+
+			<tr ng-repeat="p in day.production">
+				<td>
+					<input ng-model='p.product' type="text">
+				</td>
+				<td>
+					<input type="text" ng-model='p.goal'>
+				</td>
+				<td>
+					<input type="text" ng-model='p.produced'>
+				</td>
+				<td>
+					<input type="text" ng-model='p.time'>
+				</td>
+				<td style="white-space: nowrap">
+					<button class="btn btn-danger" ng-click="removeProduction($index)">del</button>
+					
+				</td>
+			</tr>
+		</table>
+		<button ng-click='addProduction()'>Add</button>
+	</div>
+
+	<div class='columns small-4'>
+		<h3>Todays Events</h3>
+		<textarea ng-model='day.events' name="" id="" rows='12'></textarea>
+	</div>
+</div>
+<div class="row">
+	<div class='columns small-12'>
+		<h3>Down Time/Scheduled Maintenance Tracking</h3>
+		<table class="shop table-bordered table-hover table-condensed">
+			<tr  style="font-weight: bold">
+				<td>Equip #</td>
+				<td>Scheduled Maint</td>
+				<td>Downtime</td>
+				<td>Description</td>
+				<td>Delete</td>
+			</tr>
+
+			
+
+			<tr ng-repeat="m in day.maintenance">
+				<td>
+					<input type="text" ng-model='m.equipment'>
+				</td>
+				<td>
+					<input type="text" ng-model='m.scheduledMaint'>
+				</td>
+				<td>
+					<input type="text" ng-model='m.downtime'>
+				</td>
+				<td>
+					<input type="text" ng-model='m.description'>
+				</td>
+				<td style="white-space: nowrap">
+					<button class="btn btn-danger" ng-click="removeMaintenance($index)">del</button>
+					
+				</td>
+			</tr>
+		</table>
+		<button ng-click='addMaintenance()'>Add</button>
+		
+	</div>
+</div>
+<button class='right' ng-click='submitDay(day)'>submit</button>

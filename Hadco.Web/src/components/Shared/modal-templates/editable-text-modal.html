@@ -1,0 +1,34 @@
+﻿<form>
+    <!--<h3 class="text-center">Add Note</h3>
+
+    <label>Select Type</label>
+    <select ng-model="vm.type" ng-options="type as type.name for type in options"></select>
+    <div>
+        <label>Note:</label>
+        <textarea ng-disabled="!entity.type" ng-model="entity[entity.type.key]"></textarea>
+    </div>
+    <div class="inline-label">
+        <label>Resolved</label>
+        <span class="label-padding">
+            <input type="checkbox" ng-model="entity.resolved" />
+        </span>
+    </div>
+
+        <button class="button" ng-click="confirm(entity)">Save</button>
+        <button type='button' class="button secondary" ng-click="cancel()">Cancel</button>
+        <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>-->
+    <h3 class="text-center">Add Note</h3>
+
+    <!--<label>Select Type</label>
+    <select ng-model="vm.type" ng-options="type as type.name for type in options"></select>-->
+    <div>
+        <label>Note:</label>
+        <textarea rows="8" ng-model="vm.textArea"></textarea>
+    </div>
+    <div class="inline-label">
+        <span class="label-padding"></span>
+    </div>
+        <button class="button" ng-click="vm.save()">Save</button>
+        <button type='button' class="button secondary" ng-click="vm.cancel()">Cancel</button>
+        <!--<a class="close-reveal-modal" ng-click="vm.cancel()">&#215;</a>-->
+</form>

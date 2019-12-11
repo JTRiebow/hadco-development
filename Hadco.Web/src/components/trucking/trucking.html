@@ -1,0 +1,13 @@
+<div class="row">
+	<div>
+		<div class="columns medium-2" ng-if="::vm.customerType.name != 'Trucker Dailies'">
+			<compile-html template="vm.sidebarMenuTemplate"></compile-html>
+		</div>
+
+		<div class="columns" ng-class="::{ 'medium-10': vm.customerType.name != 'Trucker Dailies' }">
+			<!-- <div><h2>{{customerType.name}}</h2></div> -->
+			<compile-html template="vm.truckingGridsTemplate"></compile-html>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,25 @@
+<div>
+    <hr />
+    <h4>Shop Timers and Equipment</h4>
+    <div class="row">
+        <div class="columns small-12">
+            <div class="row error-message" ng-show='showWarning.Equipment || showWarning.Shop'>
+                <small class="error columns small-5">Error: Total {{warningText}} Timers exceed total allocable time</small>
+            </div>
+            <div id="jobAndEquipmentTimersGrid"
+                 ui-grid="jobAndEquipmentTimersGridOptions"
+                 ui-grid-pinning
+                 ui-grid-grouping
+                 ui-grid-auto-resize
+                 ui-grid-edit
+                 class="grid"
+                 style="width:100%;"
+                 ng-style="jobAndEquipmentTimersGridTableHeight">
+            </div>
+            <button ng-disabled="!canEditRow || timersDisabled" ng-click='addShopOrEquipmentTimer(shopTimerTypes.equipment)'>Add&nbsp;Equipment</button>
+            <button ng-disabled="!canEditRow || timersDisabled" ng-click='addShopOrEquipmentTimer(shopTimerTypes.shop)'>Add&nbsp;Hadco.Shop</button>
+        </div>
+    </div>
+
+</div>
+ 

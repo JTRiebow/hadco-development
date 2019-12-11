@@ -1,0 +1,32 @@
+<div class='create-user'>
+	<h2>Materials</h2>
+	<a href="/admin/materials/create" class='button'>Create Material</a>
+	<input
+		class="search"
+		type="search"
+		placeholder='Search Materials...'
+		ng-model='selectedMaterial'
+		ng-change="searchChanged(selectedMaterial)"
+		typeahead='m.name for m in materials | filter: $viewValue | limitTo: 8'
+		typeahead-on-select='searchChanged(selectedMaterial)' >
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+	<table st-table='rowCollection' class='table table-striped'>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Category Number</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr dir-paginate='m in filteredMaterials =(materials |filter: selectedMaterial) | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+				<td>{{ m.name }}</td>
+				<td>{{ m.categoryNumber }}</td>
+				<td><a href="/admin/materials/{{m.materialID}}">edit</a><a ng-click='deleteMaterial(m)'>delete</a></td>
+				
+			</tr>
+		</tbody>
+	</table>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+
+</div>

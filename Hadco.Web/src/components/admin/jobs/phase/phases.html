@@ -1,0 +1,20 @@
+<div class='create-user'>
+	<h2>Phases</h2>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+	<table st-table='rowCollection' class='table table-striped'>
+		<thead>
+			<tr>
+				<th>Phase Number</th>
+				<th>Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr dir-paginate='p in phases | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+				<td>{{ p.phaseNumber }}</a></td>
+				<td>{{ p.name }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+	<a href="admin/jobs" class="button">Back</a>
+</div>

@@ -1,0 +1,52 @@
+<div class="inline-header-row row">
+    <h3 class="columns small-4"> CSV Downloads </h3>
+    <div class="inline-header-row columns small-8 right">
+        <label class="inline" for="start">Start Date:</label>
+        <input
+            id="start"
+            ng-model="downloadObject.startDate"
+            datepicker-popup="MM/dd/yyyy"
+            max-date="downloadObject.endDate"
+            show-button-bar="false"
+            value="downloadObject.startDate"
+            is-open="start.opened"
+            ng-focus="start.opened = true"
+            ng-click="start.opened = true"
+            type="text" >
+        
+        <label class="inline" for="end">End Date:</label>
+        <input
+            id="end"
+            ng-model="downloadObject.endDate"
+            min-date="downloadObject.startDate"
+            datepicker-popup="MM/dd/yyyy"
+            show-button-bar="false"
+            value="downloadObject.endDate"
+            is-open="end.opened"
+            ng-focus="end.opened = true"
+            ng-click="end.opened = true"
+            type="text" >
+        
+        <select
+            ng-options="d.departmentID as d.displayName for d in departments" 
+            ng-model="downloadObject.departmentID"
+        >
+            <option value="" disabled>Select a department</option>
+        </select>
+    </div>
+</div>
+
+<hr>
+
+<div class="download-csv-buttons">
+    <button
+        class='button expand'
+        ng-repeat="(typeName, type) in types"
+        ng-disabled="downloadObject.departmentID === null || checkDatesAndDepForDisabled(type, downloadObject)"
+        download
+        ng-click="downloadCSV(type, downloadObject)"
+        ng-if="vm.can(type.activityKey)"
+    >
+        {{type.name}}
+    </button>
+</div> 

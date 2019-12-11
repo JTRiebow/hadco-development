@@ -1,0 +1,107 @@
+<div class="columns medium-12">
+	<div><h2>My Foremen</h2></div>
+	<div class="row">
+		<div class="columns small-2">
+        <label>
+            Selected Foreman
+            <input keypress-events
+                   enter="foremanChanged(foreman)"
+                   ng-model='foreman'
+                   typeahead="f as f.name for f in foremen | filter:$viewValue | limitTo: 8"
+                   typeahead-on-select="foremanChanged(foreman)"
+                   typeahead-append-to-body="true"
+                   typeahead-editable="false" 
+                   placeholder=""
+                   value=""/>
+        </label>
+		</div>
+		<div class='columns small-2 end'>
+			<label for="">Choose Week
+				<input ng-model="selectedWeek" datepicker-popup="MM/dd/yyyy" show-button-bar="false" value="week.week" is-open="opened" ng-focus="opened = true" ng-click="opened = true" type="text">
+			</label>
+		</div>
+		<div class="columns small-2 end">
+			<label for="">Timers: 
+				<select type="text" 
+					ng-options='f.name for f in filters track by f.name' 
+					ng-model='filter'
+					ng-change='filterChanged(filter)'>
+				</select>
+			</label>
+		</div>
+        <div class="columns small-2 end">
+            <label for="">
+                Job
+                <input keypress-events escape="clearJob()"
+                       enter="jobChanged(selectedJob)"
+                       ng-model='selectedJob' 
+                       typeahead="job as job for job in allJobs | filter:$viewValue | limitTo: 8" 
+                       typeahead-on-select="jobChanged(selectedJob)"
+                       typeahead-append-to-body="true"
+                       typeahead-editable="false"/>
+            </label>
+		</div>
+		<div class="columns small-2 end">
+			<label for="">
+				Department
+				<select
+					ng-model="vm.departmentFilter"
+					ng-options="d.name for d in vm.departmentFilterList track by d.id"
+					ng-change="vm.onDepartmentFilterChange(vm.departmentFilter)"
+				></select>
+			</label>
+		</div>
+		<div class="columns small-1 filter-button end">
+			<button ng-click="clearFilters()">Clear Filters</button>
+		</div>
+
+		<div class="columns small-1">
+			<i ng-mouseenter="show = true" ng-mouseleave="show = false" class="fa fa-info-circle right fa-2x information-icon" aria-hidden="true">
+			</i>
+		</div>
+
+        <div ng-show="show" class="information-icon-text">
+            <h4>Shortcuts</h4>
+            <div class="legend-colors">
+                <p class="key-legend">Enter</p>
+                <p class="key-legend-inline">Shift</p>+<p class="key-legend-inline">Enter</p>
+                <p class="key-legend">Escape</p>
+            </div>
+            <div class="legend-content">
+                <p>Save Current Row</p>
+                <p>Save + New Row</p>
+                <p>Cancel/Save</p>
+            </div>
+        </div>
+		
+	</div>  
+
+	<form ng-repeat="foreman in filteredForemen" name="foremenTimesheet" novalidate>
+		<table style="margin-top: 1.25rem">
+			<thead>
+				<th colspan="4"><strong>Foreman {{foreman.name}}</strong></th>
+				<tr>
+					<td>Jobs</td>
+					<td>Date</td>
+					<td>Status</td>
+					<td>View</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="timesheet in foreman.filteredTimesheets">
+                    <td>
+                        <span ng-repeat="jobNumber in timesheet.jobNumbers">
+                                <span ng-if="$index == 2"><br /></span>
+                                {{jobNumber}}{{$last ? '' : ','}}
+                            </span>
+                    </td>
+                    <td> {{timesheet.day}}</td>
+					<td> {{timesheet.status}}</td>
+					<td> 
+					<button class="button secondary tiny" ng-click="detailPageWithCaching(timesheet)">View Timesheet</button></td>
+				</tr>
+			</tbody>
+		</table>
+		<button ng-if="vm.can('addForemanTimesheet')" ng-hide="foreman.timesheets.length == 7" class="button" ng-click="addTimesheet(foreman, selectedWeek);">Add Timesheet</button>
+	</form>
+</div>

@@ -1,0 +1,23 @@
+<div class="inner-wrap" ng-class="{ login: initialAuthCheckDone && !currentUserService.loggedIn() }">
+    <a href="#" class="exit-off-canvas"></a>
+    <div ng-show="initialAuthCheckDone" ng-cloak>
+        <div ng-if="!vm.currentUser.loggedIn()">
+            <compile-html template="vm.loginTemplate"></compile-html>
+        </div>
+        <div ng-if="vm.currentUser.loggedIn()">
+            <ht-header></ht-header>
+
+            <ht-nav></ht-nav>
+
+            <div class="row">
+                <div class="small-10 small-centered columns">
+                    <div id="main">
+                        <div ng-view></div>
+                    </div>
+                </div>
+            </div>
+            
+            <ht-footer></ht-footer>
+        </div>
+    </div>
+</div>

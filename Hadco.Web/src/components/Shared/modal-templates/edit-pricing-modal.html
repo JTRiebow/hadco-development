@@ -1,0 +1,48 @@
+
+	<div ng-show="selectedPricingID">
+		<h2 class='text-center'>{{pricing.jobNumber}}{{pricing.phaseNumber}}{{pricing.customerNumber}}</h2>
+		<h3 ng-hide="viewValidateOverlappingPricing" class='text-center'>Update Pricing</h3>
+	</div>	
+	<div ng-if="viewValidateOverlappingPricing">
+		<h3 class='text-center'>This new pricing overlaps an old pricing. Are you sure you would like to override the previous pricing?</h3>
+
+	</div>
+	<div ng-hide="viewValidateOverlappingPricing">
+		<div ng-hide="selectedPricingID">
+				<h2 class='text-center'>Add New Pricing</h2>
+			<div ng-hide="customerType.customerTypeID == 4">
+				<h3 class='text-center'>Select Bill Type</h3>
+				<select ng-options="b.billTypeID as b.name for b in billTypes" ng-change="selectBillType(selectedBillTypeID)" ng-model="selectedBillTypeID"></select>
+			</div>
+			<div ng-show="selectedBillTypeID && listOfRunsOrJobsOrCustomers.length">
+				<h3 class='text-center'>Select {{customerType.key}}</h3>
+				<input type="search" placeholder="Search by {{customerType.key}} Number" ng-model='typeaheadKey' typeahead-on-select= "selectedKey = typeaheadKey" typeahead='l as l.name for l in listOfRunsOrJobsOrCustomers | filter: $viewValue | limitTo: 15' >
+			</div>
+			<div ng-show="selectedBillTypeID && listOfRunsOrJobsOrCustomers.length == 0" class="text-center">
+				<h4 class='text-center'>There are no remaining {{customerType.key}}s to price. Update the pricing for an existing {{customerType.key}}.</h4>
+				<button class="button secondary submit-times text-center" ng-click="cancel()">Cancel</button>
+			</div> 	 	
+		</div>
+		<div class="row" ng-if="selectedKey || pricing.pricingID">
+			<div class="row">
+				<div class="column small-6 end">New Pricing Effective:</div>
+			</div>
+			<div class='columns small-6 end'>
+                <label for="">From: </label>
+					<input ng-model="pricing.startDate" min-date="earliestDate" datepicker-popup="MM/dd/yyyy" show-button-bar="false" is-open="opened" ng-focus="opened = true" ng-click="opened = true" type="text">
+				
+			</div>
+			<div class='columns small-6 end'>
+                <label for="">To: </label>
+					<input ng-model="pricing.endDate" datepicker-popup="MM/dd/yyyy" min-date="pricing.startDate" show-button-bar="false" is-open="job.opened" ng-focus="job.opened = true" ng-click="job.opened = true" type="text" >
+				
+			</div>
+		</div>	
+		<div  ng-if="selectedKey || pricing.pricingID" class="grid" style="height:40vh" id="grid" ui-grid="gridOptions" ui-grid-edit class="grid"></div>
+		</div>	
+		<div  ng-if="selectedKey || pricing.pricingID"  class='buttons-below-grid text-center'>		<button ng-show="viewValidateOverlappingPricing" ng-click="save(selectedLey, 'canOverlap')">Save</button>
+			<button ng-hide="viewValidateOverlappingPricing" ng-disabled="isValidated()" class="button submit-times text-center" ng-click="save(selectedKey)">Save</button>
+			<button class="button secondary submit-times text-center" ng-click="cancel()">Cancel</button>
+		</div>
+
+	<a class="close-reveal-modal" ng-click="cancel()">&#215;</a>

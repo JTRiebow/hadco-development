@@ -1,0 +1,44 @@
+<form>
+	<h2 class='text-center'>Supervisor -- Jaron Brown</h2>
+	<a href="/supervisor/all" class='button'>Supervisors</a>
+	<div class="row">
+		<div class="columns small-12">
+			<label>Search for Employee
+				<input type="text">
+			</label>
+		</div>
+	</div>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+	<table st-table='rowCollection' class='table table-striped'>
+		<thead>
+			<tr>
+				<th class='row-name'>Employee Name</th>
+				<th class='row-day'>8/20</th>
+				<th class='row-day'>8/21</th>
+				<th class='row-day'>8/22</th>
+				<th class='row-day'>8/23</th>
+				<th class='row-day'>8/24</th>
+				<th class='row-day'>8/25</th>
+				<th class='row-day'>8/26</th>
+				<th class='row-week'>Total</th>
+				<th class='row-box' ng-click='selectAll()'>Approved??</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr dir-paginate='e in employees | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+				<td>{{ e.name }}</td>
+				<td>{{ e.day1.hours }}</td>
+				<td>{{ e.day2.hours }}</td>
+				<td>{{ e.day3.hours }}</td>
+				<td>{{ e.day4.hours }}</td>
+				<td>{{ e.day5.hours }}</td>
+				<td>{{ e.day6.hours }}</td>
+				<td>{{ e.day7.hours }}</td>
+				<td>{{ e.weeklyTotal }}</td>
+				<td><input class='check-input' type="checkbox" ng-model='selected[e.employeeId]'></td>
+				<td class='td-notes' ng-if='me.roles.isSupervisor() || me.roles.isManager'>{{ e.notes }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+</form>

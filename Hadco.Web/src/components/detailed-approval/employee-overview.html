@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="columns small-4 left">
+        <h4>{{vm.timers[0].employee.name}}</h4>
+    </div>
+    <div class="inline-header-row columns small-4">
+        <button ng-click="vm.changeDate('prev')" class="button tiny radius">&lt;&lt;</button>
+        <label>Date:</label>
+        <input
+            id="selectDate"
+            ng-change="vm.changeDate()"
+            ng-model="vm.day"
+            show-button-bar="false"
+            datepicker-popup="MM/dd/yyyy"
+            is-open="vm.opened"
+            ng-focus="vm.opened = true"
+            ng-click="vm.opened = true"
+            keypress-events enter="vm.changeDate('enter')"
+            type="text" >
+        <button ng-click="vm.changeDate('next')" class="button tiny radius">&gt;&gt;</button>
+    </div>
+    <div class="columns small-4 right">
+        <button
+            ng-if="vm.canApprove"
+            class="button tiny radius blue"
+            ng-click="vm.approveTimer()"
+            title="Approve Timer as {{ vm.getApprovalRole() }}"
+        >
+            Approve
+        </button>
+        <button
+            ng-if="vm.canReject"
+            class="button tiny radius yellow"
+            ng-click="vm.reject()"
+        >
+            Reject
+        </button>
+        <button class="button tiny radius" ng-click="vm.returnToApprovalPage()">Exit</button>
+        
+        <div ng-show="vm.isTooltipVisible" class="info-tooltip-text">
+            <h4 class="text-center">Keyboard Shortcuts</h4>
+            <ul>
+                <li><strong>ctrl + shift + 1:</strong> open time card </li>
+                <li><strong>ctrl + shift + 2:</strong> open timers </li>
+                <li><strong>enter:</strong> save row </li>
+                <li><strong>shift + enter:</strong> save row and focus next row</li>
+                <li><strong>escape:</strong> cancel edit</li>
+                <li><strong>tab:</strong> navigate through fields</li>
+                <li><strong>shift + tab:</strong> navigate backwords through fields </li>
+            </ul>
+        </div>
+        <i ng-click="vm.isTooltipVisible = !vm.isTooltipVisible" 
+           ng-mouseleave="vm.isTooltipVisible = false" 
+           ng-mouseover="vm.isTooltipVisible = true" 
+           class="fa fa-info-circle right fa-2x info-tooltip" 
+           aria-hidden="true">
+        </i>
+    </div>
+</div>
+<tabset >
+    <tab id="timecardtab"
+         heading="Time Card (ctrl + shift + 1)" 
+         ng-click='vm.changeTab("timecard")' 
+         active="vm.timecardTabActive">
+        <employee-detailed-hours is-timecard-tab="true" timers="vm.timers" department="vm.department"></employee-detailed-hours>
+    </tab>
+    <tab id="timerstab" heading="{{::vm.timerTabName}} Timers (ctrl + shift + 2)" ng-click="vm.changeTab('timers')" active="vm.timersTabActive">
+        <employee-detailed-hours is-timecard-tab="false" timers="vm.timers" department="vm.department"></employee-detailed-hours>
+    </tab>
+</tabset>
+

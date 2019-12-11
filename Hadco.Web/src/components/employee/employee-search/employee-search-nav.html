@@ -1,0 +1,8 @@
+﻿<input keypress-events escape="clearSearch()"
+       enter="searchEmployee(selectedEmployee)"
+       placeholder="Search for Employee"
+       ng-model="selectedEmployee"
+       typeahead="selectedEmployee as selectedEmployee.name for selectedEmployee in employeeList | filter: { name:$viewValue } | limitTo: 8"
+       typeahead-append-to-body="true"
+       typeahead-editable="false"
+       typeahead-on-select="searchEmployee(selectedEmployee)" />

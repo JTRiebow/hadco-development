@@ -1,0 +1,23 @@
+<md-dialog class="add-text-modal">
+    <form ng-submit="$event.preventDefault()">
+        <h3 ng-if="vm.title">{{ vm.title }}</h3>
+        
+        <label for="add-text-field" ng-class="{ required: vm.required }">{{ vm.label }}</label>
+        
+        <input type="text" id="add-text-field" name="add-text-field" ng-model="vm.value" ng-if="!vm.useTextarea">
+        
+        <textarea name="add-text-field" id="add-text-field" rows="2" ng-model="vm.value" ng-if="vm.useTextarea"></textarea>
+        
+        <div class="modal-controls">
+            <md-button class="like-zurb md-raised" ng-click="vm.cancel()">Cancel</md-button>
+            <md-button
+                type="submit"
+                class="like-zurb md-primary md-raised"
+                ng-click="vm.close(vm.value)"
+                ng-disabled="vm.required && !vm.value"
+            >
+                Submit
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

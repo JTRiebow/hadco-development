@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <div class="columns small-12 small-centered">
+        <div ng-hide="ctrl.hideMap" class="image-wrapper right">
+            <img  ng-src='{{ctrl.map}}'>
+            <i class="fa fa-lg fa-map-o map-icon" ng-click="ctrl.changeZoom()"></i>
+        </div>
+        <div ng-show="ctrl.hideMap" class="error-message empty-map">
+            <small class="text-center error">No GPS data available</small>
+        </div>
+    </div>
+</div>
+<div class="row right" ng-if="ctrl.timeframe">
+    <div class="columns small-12 inline-label buttons-below-grid">
+        <label class="long-label">GPS From:</label>
+        <span>
+            <select class="gps-dropdown" 
+                    ng-model="ctrl.timeframe.startTime" 
+                    ng-options="time.date as time.time for time in ctrl.dropDownTimes"
+                    ng-change="ctrl.timeChanged()">
+            </select>
+        </span>
+        <label>To:</label>
+        <span>
+            <select class="gps-dropdown"  
+                    ng-model="ctrl.timeframe.endTime"
+                    ng-options="time.date as time.time for time in ctrl.dropDownTimes"
+                    ng-change="ctrl.timeChanged()">
+            </select>
+        </span>
+        <label><i ng-click="ctrl.reset()" class="fa fa-lg fa-refresh" aria-hidden="true" title="Reset Map"></i></label>
+    </div>
+</div>

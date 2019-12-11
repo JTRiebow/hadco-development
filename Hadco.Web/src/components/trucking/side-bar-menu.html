@@ -1,0 +1,14 @@
+<div class="side-bar side-nav" ng-if="customerType.name == 'Development' || customerType.name == 'Outside' || customerType.name == 'Metro' || customerType.name == 'Residential'"><h3>Pricing</h3>
+	<li><a ng-click="customerTypeChange(customerTypes[0])"><span ng-class="{current: customerTypes[0] === customerType}">Development</span></a> </li>
+	<li><a ng-click="customerTypeChange(customerTypes[2])"><span ng-class="{current: customerTypes[2] === customerType}">Outside</span></a></li>
+	<li><a ng-click="customerTypeChange(customerTypes[3])"><span ng-class="{current: customerTypes[3] === customerType}">Metro</span></a> </li>
+	<li><a ng-click="customerTypeChange(customerTypes[1])"><span ng-class="{current: customerTypes[1] === customerType}">Residential</span></a></li>
+</div>
+
+<div class="side-nav side-bar" ng-if="customerType.name == 'Proj. vs Actual' || customerType.name == 'Revenue by Customer' || customerType.name == 'Revenue by Dept.' || customerType.name == 'Revenue by Truck' || customerType.name == 'Quantity'"><h3>Reporting</h3>
+	<li><a ng-click="customerTypeChange(reportingTypes[0])"><span ng-class="{current: reportingTypes[0] === customerType}">Proj. vs Actual</span></a> </li>
+	<li><a ng-click="customerTypeChange(reportingTypes[1])"><span ng-class="{current: reportingTypes[1] === customerType}">Revenue by Customer</a> </li>
+	<li><a ng-click="customerTypeChange(reportingTypes[2])"><span ng-class="{current: reportingTypes[2] === customerType}">Revenue by Dept.</a>  </li>
+	<li><a ng-click="customerTypeChange(reportingTypes[3])"><span ng-class="{current: reportingTypes[3] === customerType}">Revenue by Truck</a>  </li>
+	<li><a ng-click="customerTypeChange(reportingTypes[4])"><span ng-class="{current: reportingTypes[4] === customerType}">Quantity</a>  </li>
+</div>

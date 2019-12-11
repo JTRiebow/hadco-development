@@ -1,0 +1,9 @@
+<form>
+	<h3>HADCO.SHOP</h3>
+	<select required name="" id="" ng-model='clock.hadco' ng-options='h.name for h in shopDrop'>
+		<option value="" disabled>Select One</option>
+	</select>
+	<textarea placeholder='Notes...' required focus-me ng-model='clock.notes' cols="30" rows="10"></textarea>
+	<button class="button alert" ng-click="confirm(clock)">Submit</button>
+	<a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+</form>

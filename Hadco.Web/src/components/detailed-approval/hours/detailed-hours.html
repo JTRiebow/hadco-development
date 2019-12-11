@@ -1,0 +1,299 @@
+<add-text-modal on-trigger-emit="vm.assignAddTextModalTriggers(triggers)"></add-text-modal>
+<ht-confirm-modal get-triggers="vm.assignConfirmModalTriggers(triggers)"></ht-confirm-modal>
+
+<div class="row timer-entry-directive">
+    <div class="columns small-12">
+        <span ng-if="vm.department.CDR">
+            <button
+                type="button"
+                ng-change="vm.toggleTimer(vm.activeTimer)"
+                class="button tiny radius"
+                ng-class="vm.activeTimer == 'all' ? '' : 'secondary'"
+                ng-model="vm.activeTimer"
+                btn-radio="'all'"
+            >
+                Combined
+            </button>
+            
+            <span ng-repeat="timerTab in vm.timers">
+                <button
+                    type="button"
+                    ng-change="vm.toggleTimer(vm.activeTimer)"
+                    ng-click="vm.returnToSupervisorTimesheet($index, $event)"
+                    class="button tiny radius"
+                    ng-class="vm.activeTimer == $index ? '' : 'secondary'"
+                    ng-model="vm.activeTimer"
+                    ng-init="vm.activeTimer = 0"
+                    title="{{timerTab.supervisor.name}}"
+                    btn-radio="$index"
+                >
+                    {{timerTab.supervisor.username || timerTab.supervisor.name || "SUPERVISOR"}}
+                </button>
+            </span>
+            
+            <button
+                class="button tiny radius"
+                ng-if="vm.isTimecardTab && vm.can('addTimersFromSupervisorCard')"
+                title="Add to Timesheet"
+                ng-click="vm.addToTimesheet()"
+                ng-disabled="vm.timersDisabled"
+            >
+                <i class="fa fa-plus fa-lg white-text"></i>
+            </button>
+        </span>
+        
+        <button
+            class="button tiny radius right"
+            ng-if="!vm.isTimecardTab && vm.canAddNewNote && vm.can('flagEmployeeTimer')"
+            title="New Note"
+            ng-click="vm.addNote()"
+            ng-disabled="vm.timersDisabled"
+        >
+            New Note
+        </button>
+        
+        <span>
+            <i
+                class="fa fa-check fa-lg timecard-check"
+                ng-class="vm.checkColor"
+                aria-hidden="true"
+            ></i>
+        </span>
+    </div>
+    
+    <div class="columns small-12">
+        <div ng-if="!vm.isTimecardTab">
+            <h4>
+                <i
+                    class="fa fa-caret-down"
+                    ng-click="vm.hideEntries = !vm.hideEntries"
+                    aria-hidden="true"
+                ></i>
+                Employee Timer Entries and Notes
+            </h4>
+        </div>
+        
+        <div ng-if="!vm.hideEntries" class="row">
+            <div class="button-group columns small-7" >
+                <div
+                    ui-grid="vm.timerEntryGridOptions"
+                    ng-style="vm.gridTableHeight"
+                    ui-grid-pinning
+                    ui-grid-validate
+                    ui-grid-auto-resize
+                    ui-grid-draggable-rows
+                ></div>
+                
+                <div class="row error-message" ng-show='vm.invalidEntries(vm.timers)'>
+                    <small class="error columns small-9">Invalid Clock in and Clock out</small>
+                </div>
+                
+                <div ng-if="vm.isTimecardTab" class="row">
+                    <hr />
+                    
+                    <div class="columns small-6">
+                        <div class="inline-label ">
+                            <label>Total Hours: {{vm.dayTimer.formattedTotalMinutes || vm.formattedTotalMinutes}}</label>
+                        </div>
+                        
+                        <div class="inline-label" ng-if="vm.viewOdometer && vm.can('editOdometerReading')">
+                            <label>Odometer:</label>
+                            
+                            <input 
+                                type="number"
+                                class="input-time"
+                                ng-model="vm.odometer"
+                                ng-model-options="{ debounce: 1000 }"
+                                ng-change="vm.updateOdometer(vm.odometer)" >
+                        </div>
+                        
+                        <div
+                            ng-if="vm.timerEntryGridOptions.data.length > 0 && vm.dayTimer"
+                            class="inline-label"
+                        >
+                            <label>Injured?</label>
+                            
+                            <span class="label-padding">
+                                <input
+                                    type="radio"
+                                    class="radio"
+                                    ng-click='vm.toggleInjured(vm.dayTimer.injured, vm.dayTimer.employeeTimerID)'
+                                    ng-model='vm.dayTimer.injured'
+                                    ng-value='true'
+                                    ng-disabled="vm.timersDisabled && !vm.can('markTimerInjury')"
+                                    id="y" >
+                                
+                                <label for="y">Yes</label>
+                            </span>
+                            
+                            <span class="label-padding">
+                                <input
+                                    type="radio"
+                                    class="radio"
+                                    ng-click='vm.toggleInjured(vm.dayTimer.injured, vm.dayTimer.employeeTimerID)'
+                                    ng-model='vm.dayTimer.injured'
+                                    ng-disabled="vm.timersDisabled && !vm.can('markTimerInjury')"
+                                    ng-value='false'
+                                    id="n" />
+                                
+                                <label for="n">No</label>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div ng-if="vm.activeTimer != 'all' && vm.can('viewEmployeeOccurrences')" class="columns small-6">
+                        <div class="inline-label">
+                            <label>Occurrences</label>
+                        </div>
+                        
+                        <oi-select
+                            class="select-occurrences"
+                            oi-options="o.name for o in vm.dropDownLists.occurrences"
+                            ng-model="vm.dayTimer.occurrences"
+                            ng-disabled="true"
+                            input-hide="true"
+                        ></oi-select>
+                    </div>
+                </div>
+                
+                <div ng-if="vm.isTimecardTab && vm.canEditRow && vm.activeTimer != 'all'" class="right">
+                    <button
+                        type="button"
+                        ng-click="vm.addOccurrence(vm.dayTimer)"
+                        ng-disabled="vm.timersDisabled"
+                        class="button tiny radius"
+                        ng-if="vm.can('editEmployeeOccurrences')"
+                    >
+                        {{ vm.dayTimer.occurrences.length ? 'Edit Occurrences' : 'Add Occurrence' }}
+                    </button>
+                    
+                    <button
+                        type="button"
+                        ng-click="vm.addTimerEntry()"
+                        ng-disabled="vm.timersDisabled"
+                        class="button tiny radius"
+                        ng-if="vm.can('addEmployeeTimerEntry')"
+                    >
+                        Add Timer
+                    </button>
+                </div>
+                
+                <div
+                    ng-if="
+                        vm.isTimecardTab &&
+                        !vm.canEditRow &&
+                        vm.can('editEmployeeTimerEntry')
+                    "
+                    class="right"
+                >
+                    <button
+                        type="button"
+                        ng-click="vm.cancelEdit()"
+                        class="button tiny radius"
+                    >
+                        Cancel
+                    </button>
+                    
+                    <button
+                        type="button"
+                        ng-click="vm.saveTimerEntries()"
+                        ng-disabled="vm.timersDisabled"
+                        class="button tiny radius blue"
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+            
+            <div ng-if="vm.isTimecardTab" class="columns small-5 right left-border">
+               <gps-map gps="vm.gps" visible-timer-entries="vm.timerEntryGridOptions.data"></gps-map>
+            </div>
+            <div ng-if="!vm.isTimecardTab" class="columns small-5">
+                <timer-notes-grid is-timecard-tab="false" visible-timer-entries="vm.timerEntryGridOptions.data"></timer-notes-grid>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<div ng-if="!vm.isTimecardTab && vm.department.CDR" class="row">
+    <div class="button-group columns small-12">
+        <hr />
+        <h4><i class="fa fa-caret-down" ng-click="hideOverhead = !hideOverhead" aria-hidden="true"></i> Overhead</h4>
+        <overhead-grid ng-if="!hideOverhead" active-timer="vm.dayTimer" timers="vm.timers"></overhead-grid>
+
+    </div>
+</div>
+
+<div ng-if="!vm.isTimecardTab && vm.department.shop" class="row">
+    <div class="button-group columns small-12">
+        <hr />
+        <h4><i class="fa fa-caret-down" ng-click="hideOverhead = !hideOverhead" aria-hidden="true"></i> Overhead</h4>
+        <table ng-if="!hideOverhead">
+            <thead>
+                <tr>
+                    <th>Foreman</th>
+                    <th>Truck</th>
+                    <th>Travel Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{vm.foremanName}}</td>
+                    <td>{{vm.truckName}}</td>
+                    <td>{{vm.travelMinutes}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div ng-if="vm.isTimecardTab" class="row">
+    <div class="columns small-12">
+        <hr />
+        <tabset>
+            <tab heading="Notes" active="vm.notesTabActive">
+                <notes-grid is-timecard-tab="true" visible-timer-entries="vm.timerEntryGridOptions.data" current-approvals="vm.employeeApprovals"></notes-grid>
+            </tab>
+            <tab heading="Edit History" ng-click="vm.getAllHistory()" active="vm.historyTabActive" ng-if="vm.can('viewEmployeeTimerEditHistory')">
+                <button class="tiny button right radius" ng-if="!vm.allHistory" ng-click="vm.getAllHistory()">View All History</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Edit History</th>
+                            <th>Editor</th>
+                            <th>Old Clock In</th>
+                            <th>New Clock In</th>
+                            <th>Old Clock Out</th>
+                            <th>New Clock Out</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat='h in vm.visibleHistory'>
+                        <tr>
+                            <td title="{{ h.date }}">{{ h.date }}</td>
+                            <td title="{{ h.name }}">{{ h.name }}</td>
+                            <td>{{ h.previousClockIn }}</td>
+                            <td>{{ h.currentClockIn }}</td>
+                            <td>{{ h.previousClockOut }}</td>
+                            <td>{{ h.currentClockOut }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tab>
+        </tabset>
+    </div>
+</div>
+<div ng-if="!vm.isTimecardTab">
+    <div ng-if='vm.department.CDR'>
+        <detailed-concrete day-timer="vm.dayTimer" timers="vm.timers"></detailed-concrete>
+    </div>
+
+    <div ng-if='vm.department.shop'>
+        <detailed-shop timers="vm.timers"></detailed-shop>
+    </div>
+
+    <div ng-if='vm.department.trucking || vm.department.transport'>
+        <detailed-trucking timers="vm.timers"></detailed-trucking>
+    </div>
+</div>
+

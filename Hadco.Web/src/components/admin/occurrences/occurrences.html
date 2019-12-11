@@ -1,0 +1,25 @@
+<div class='create-user'>
+	<h2>Occurrences</h2>
+	<a href="/admin/occurrences/create" class='button'>Create Occurrence</a>
+	 <input class="search" type="search" placeholder='Search Occurrences...' ng-model='selectedOccurrence' ng-change="searchChanged(selectedOccurrence)" typeahead='o.name for o in occurrences | filter: $viewValue | limitTo: 8' typeahead-on-select='searchChanged(selectedOccurrence)'>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+	<table st-table='rowCollection' class='table table-striped'>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Code</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr dir-paginate='o in filteredOccurrences = (occurrences | filter: selectedOccurrence) | itemsPerPage: pagination.itemsPerPage' total-items='pagination.totalItems' current-page='pagination.currentPage'>
+				<td>{{ o.name }}</td>
+				<td>{{ o.code }}</td>
+				<td><a href="/admin/occurrences/{{o.occurrenceID}}">edit</a><a ng-click='deleteOccurrence(o)'>delete</a></td>
+				
+			</tr>
+		</tbody>
+	</table>
+	<dir-pagination-controls class='pagination-controls'></dir-pagination-controls>
+
+</div>

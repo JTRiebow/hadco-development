@@ -1,0 +1,11 @@
+﻿<div class="ui-grid-cell-contents" ng-if="!isCellHidden && !isCellEditable">{{row.entity[colFieldKey] | date: "h:mm a"}}</div>
+<div class="ui-grid-cell-contents" ng-if="!isCellHidden && isCellEditable">
+    <timepicker round-display="true" class="timepicker grid" ng-class="row.entity[colFieldKey +'Overlap'] || (required && !row.entity[colFieldKey]) ? 'red-border-warning' : ''"
+                keypress-events escape="row.grid.appScope.confirmCancel(row, type)" 
+                enter="row.grid.appScope.enterKeypressSave(row, type)" 
+                shift-enter="row.grid.appScope.enterKeypressSave(row, type, 'shiftEnter')"
+                min-time="row.grid.appScope.earliestClockIn"
+                max-time="row.grid.appScope.lastClockOut" mousewheel="false"
+                ng-model="row.entity[colFieldKey]" value="row.entity[colFieldKey]">
+    </timepicker>
+</div>

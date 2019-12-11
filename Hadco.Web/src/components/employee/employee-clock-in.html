@@ -1,0 +1,101 @@
+<div class='row'>
+    <div ng-if="!vm.allowedToClockIn">
+        <h1 class='text-center'> Please use the mobile app to Clock In and Clock Out</h1>
+        <!--<div class="row">
+            <div ng-if="ios" class="small-12 columns">
+                <a href="https://rink.hockeyapp.net/apps/30b40d2ff9974175940c76a43dfef45a" class="image-logo">
+                    <i class="fa fa-apple" aria-hidden="true"></i>
+                    <!--<img class="device-image" src="../../../content/images/ios.png" />
+                </a>
+                <h3 class="text-center"><a href="https://rink.hockeyapp.net/apps/30b40d2ff9974175940c76a43dfef45a">Get it on iOS</a></h3>
+            </div>
+            <div ng-if="android" class="small-12 columns">
+                <a href="https://rink.hockeyapp.net/apps/1d058d835d1e400f9cfab82f9f7c1315" class="image-logo">
+                   <i class="fa fa-android" aria-hidden="true"></i>
+                    <!-- <img class="device-image" src="../../../content/images/android.png" />
+                </a>
+                <h3 class="text-center"><a href="https://rink.hockeyapp.net/apps/1d058d835d1e400f9cfab82f9f7c1315">Get it on Android</a></h3>
+            </div>
+        </div>-->
+    </div>
+	<div ng-if="vm.allowedToClockIn && clockInTime" class="small-4 column greeting">
+		<h4 class="text-center">{{employee.name}},</h4>
+		<h4 class="text-center">Thank you for clocking in as</h4>
+		<h4 class="text-center" ng-show="clockInTime"> {{selectedDepartment.name}} at</h4>
+		<h2 class="text-center">{{clockInTime}}</h2>
+		
+		<div class="text-center">
+			<button class="text-center button secondary" ng-click='logout()'>Logout</button>
+		</div>
+	</div>
+	<div ng-if="vm.allowedToClockIn && !clockInTime" class="small-4 column greeting">
+		<h4 class="text-center">{{employee.name}},</h4>
+		<h4 class="text-center">You are not clocked in.</h4>
+		<div class="text-center">If you need to clock in for a department other than TM Crushing and Front Office, please use the mobile app.</div>
+		<div class="text-center">
+			<button class="text-center button secondary" ng-click='logout()'>Logout</button>
+		</div>
+	</div>
+	<div class="small-2 column" ng-if="vm.allowedToClockIn">
+
+		<select ng-show="multipleDepartments && !clockInTime" placeholder="Select Department" ng-options= "dep.name for dep in multipleDepartments" ng-model="selectedDepartment" ng-change="accessTimers(selectedDepartment)"></select>
+
+		<div class="text-center time-buttons">
+			<button ng-disabled='clockInTime' ng-click='clockIn()' class="text-center button">Clock In</button>
+			<button  ng-disabled='!clockInTime' ng-click='clockOut()' class="text-center button">Clock Out</button>
+		</div>
+	</div>
+
+	<div class="small-3 column end small-offset-1">
+		<table>
+			<thead>
+				<tr>
+					<th class='label-cell'>Day</th>
+					<th class='label-cell'>Last Week</th>
+					<th class='label-cell'>This week</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat='day in week'>
+				<tr>
+					<td>{{ day.day }}</td>
+					<td>{{ oldTime[$index].totalHours }} </td>
+					<td>{{ day.totalHours }}</td>
+				</tr>
+			</tbody>
+			<thead>
+				<tr>
+					<th>Total Hours</th>
+					<td>{{ oldTotal }} </td>
+					<th>{{ totalTime || 0 }}</th>
+				</tr>
+			</thead>
+		</table>
+
+	
+		<table>
+			<thead>
+				<tr>
+					<th class='label-cell'>Daily History</th>
+					<th class='label-cell'>Time Stamp</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat='e in timerData.employeeTimerEntries'>
+				<tr>
+					<td>clock in</td>
+					<td>{{e.clockIn}}</td>
+				</tr>
+				<tr>
+					<td>clock out</td>
+					<td>{{e.clockOut}}</td>
+				</tr>
+			</tbody>
+			<thead>
+				<tr>
+					<th>Total Hours</th>
+					<th>{{timerData.totalHours}}</th>
+				</tr>
+			</thead>
+		</table>
+
+	</div>
+</div>

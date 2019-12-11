@@ -1,0 +1,26 @@
+﻿<div class="fixed">
+    <nav id='nav-bar' class="top-bar tab-bar" data-topbar role="navigation">
+        <section class="top-bar-section logout-section">
+            <ul class="right">
+                <li ng-if="vm.can('searchEmployees')">
+                    <employee-search></employee-search>
+                </li>
+                <li>
+                    <a href="#" ng-click="vm.logout()">Logout</a>
+                </li>
+            </ul>
+        </section>
+
+        <ul class="title-area">
+            <li class="name">
+                <section class="left-small">
+                    <a href="#" class="left-off-canvas-toggle menu-icon"><span></span></a>
+                </section>
+            </li>
+            <li class="name">
+                <span ng-if="!vm.can('viewSupervisorTimers')"><a href='/employee/clock-in'>Hadco</a></span>
+                <span ng-if="vm.can('viewSupervisorTimers')"><a href='/supervisor/timer/approval'>Hadco</a></span>
+            </li>
+        </ul>
+    </nav>
+</div>

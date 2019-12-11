@@ -1,0 +1,206 @@
+@import '../../../assets/foundation-settings';
+
+ht-roles {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	
+    .page-title {
+        display: flex;
+        position: relative;
+
+        h2 {
+            flex: 1;
+        }
+    }
+    
+    .information-icon-text {
+        md-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    
+	.roles-wrapper {
+		width: 90vw;
+	}
+	
+	.role-table {
+		border: 1px solid #ccc;
+		display: grid;
+		grid-template-areas: 'spacer roles'
+			'activities role-activities';
+		grid-template-columns: max-content 1fr;
+		grid-template-rows: max-content 1fr;
+		max-height: 75vh;
+		margin-bottom: 50px;
+		overflow: hidden;
+		
+		.md-icon-button {
+			$button-span: 2em;
+			
+			height: $button-span;
+			min-height: 1em;
+			min-width: 1em;
+			width: $button-span;
+			
+			md-icon {
+				align-items: center;
+				display: inline-flex;
+				height: 100%;
+				justify-content: center;
+				width: 100%;
+			}
+		}
+		
+		.cell {
+			font-size: .85em;
+			padding: .7em .9em;
+			position: relative;
+			
+			i.fa {
+				display: inline-block;
+				
+				&:not(:first-child) {
+					margin-left: .4em;
+				}
+			}
+		}
+		
+		.spacer,
+		.roles {
+			background-color: #ddd;
+			border-bottom: 1px solid #ccc;
+			font-weight: bold;
+		}
+		
+		.spacer,
+		.roles,
+		.activity-row .role-tabs {
+			min-height: 39px;
+		}
+		
+		.spacer {
+			grid-area: spacer;
+		}
+		
+		.spacer,
+		.activities {
+			border-right: 1px solid #ccc;
+		}
+		
+		.activities,
+		.roles {
+			overflow: hidden;
+		}
+		
+		.roles {
+			grid-area: roles;
+			text-align: center;
+		}
+		
+		.roles,
+		.activity-row .role-tabs {
+			display: flex;
+			text-align: center;
+			
+			> * {
+				flex: 1;
+				min-width: 180px;
+			}
+			
+			.md-button {
+				line-height: 1em;
+				margin: 0;
+				padding: 0;
+				text-transform: none;
+				
+				&:not(.md-icon-button) {
+					border-radius: 0;
+				}
+				
+				&:hover,
+				&:focus {
+					background-color: #ccc;
+					color: #222;
+				}
+			}
+		}
+		
+		// .role-tabs:hover {
+		// 	cursor: pointer;
+		// }
+		
+		.activities {
+			display: grid;
+			grid-area: activities;
+		}
+		
+		.role-activities {
+            grid-area: role-activities;
+            overflow: auto;
+		}
+		
+		.activity-row {
+			display: inline-block;
+			min-width: 100%;
+			
+			&:nth-child(even) {
+				&,
+				.cell {
+					background-color: #eee;
+				}
+			}
+			
+			&.active,
+			&.md-whiteframe-3dp {
+				position: relative;
+				z-index: 6;
+				
+				.role-tabs {
+					.md-button {
+						background-color: #e6e6e6;
+						// color: #fff;
+						// opacity: .5;
+						
+						&:not(.active):focus,
+						&:not(.active):hover {
+							border-top: 2px solid #a99;
+							// opacity: .75;
+						}
+						
+						&.active {
+							background-color: #fff;
+							border-top: 4px solid $hadco-red;
+							opacity: 1;
+							font-weight: 600;
+						}
+					}
+				}
+			}
+		}
+		
+		.edit-wrapper {
+			background-color: #fff;
+            padding: 40px;
+			position: absolute;
+            
+            .dismiss-row {
+                margin: 0;
+                margin-top: 25px;
+            }
+		}
+	}
+	
+	p {
+		&:last-child {
+			margin-bottom: 0;
+		}
+		
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}

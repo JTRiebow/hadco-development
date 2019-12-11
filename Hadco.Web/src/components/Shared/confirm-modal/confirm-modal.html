@@ -1,0 +1,8 @@
+<md-dialog class="ht-simple-dialog confirm-modal" aria-label="Confirm: {{ $ctrl.text }}">
+    <h3 ng-if="$ctrl.heading">{{ $ctrl.heading }}</h3>
+    <p>{{ $ctrl.text }}</p>
+    <div class="modal-actions">
+        <md-button class="like-zurb md-raised" ng-click="$ctrl.vm.close(false)">{{ $ctrl.cancel }}</md-button>
+        <md-button class="like-zurb md-primary md-raised" ng-click="$ctrl.vm.close(true)">{{ $ctrl.ok }}</md-button>
+    </div>
+</md-dialog>

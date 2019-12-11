@@ -1,0 +1,1 @@
+import './trucking-module';
