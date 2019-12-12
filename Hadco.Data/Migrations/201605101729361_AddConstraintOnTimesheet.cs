@@ -7,16 +7,16 @@ namespace Hadco.Data.Migrations
     {
         public override void Up()
         {
-            //DropIndex("dbo.Timesheets", new[] { "DepartmentID" });
-            //DropIndex("dbo.Timesheets", new[] { "EmployeeID" });
-            //CreateIndex("dbo.Timesheets", new[] { "DepartmentID", "EmployeeID", "Day" }, unique: true, name: "IX_DepartmentIDEmployeeIDAndDay");
+            DropIndex("dbo.Timesheets", new[] { "DepartmentID" });
+            DropIndex("dbo.Timesheets", new[] { "EmployeeID" });
+            CreateIndex("dbo.Timesheets", new[] { "DepartmentID", "EmployeeID", "Day" }, unique: true, name: "IX_DepartmentIDEmployeeIDAndDay");
         }
         
         public override void Down()
         {
-            //DropIndex("dbo.Timesheets", "IX_DepartmentIDEmployeeIDAndDay");
-            //CreateIndex("dbo.Timesheets", "EmployeeID");
-            //CreateIndex("dbo.Timesheets", "DepartmentID");
+            DropIndex("dbo.Timesheets", "IX_DepartmentIDEmployeeIDAndDay");
+            CreateIndex("dbo.Timesheets", "EmployeeID");
+            CreateIndex("dbo.Timesheets", "DepartmentID");
         }
     }
 }
