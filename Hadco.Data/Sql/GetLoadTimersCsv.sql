@@ -17,8 +17,8 @@ with loads as
 					 when p.phasenumber = 'HKTC' then 'HKTC'
 					 when p.phasenumber = 'STKN' then 'STKN'
 					 when p.phasenumber = 'STWJ' then 'STWJ'
+					 when p.phasenumber = 'GVSL' then 'GVSL'
 					 when (j.jobnumber = 'ALTAVW' and  p.phasenumber = 'STTC') then 'STTC'
-					 when (j.jobnumber = 'ALTAVW' and  p.phasenumber = 'GVSL') then 'GVSL'
 					 END
 			else 'TRK HAUL' end Class,
 			d.Name Department,
